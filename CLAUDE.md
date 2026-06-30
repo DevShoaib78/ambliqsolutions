@@ -12,10 +12,10 @@ Core message: *Every missed call is a missed opportunity. Every fast response is
 - **Full design spec:** `docs/superpowers/specs/2026-06-30-ambliq-website-design.md` — read this first.
 
 ## Status
-Pre-scaffold → implementation. Design approved; spec committed. The Next.js app is being built per the spec/plan. Update this section as milestones land.
+Built. All plan tasks complete on branch `feat/website-build` — landing page (10 sections: Hero, Problem, Features, ROI calculator, Results, Services, Integrations, Process, Final CTA, FAQ) + `/book` + SEO. Responsive (390/768/1024/1440) and reduced-motion verified; production build green; all pages static (SSG). Pending from Umar: Calendly URL (`NEXT_PUBLIC_CALENDLY_URL`), real testimonials/stats/integration logos, and a white/inverted logo variant for dark sections.
 
 ## Tech stack
-Next.js 15 (App Router) · TypeScript · Tailwind CSS · shadcn/ui · Lenis (smooth scroll) · GSAP + ScrollTrigger (animation) · Manrope font (`next/font`). Fully static (SSG). Deploy target: Vercel.
+Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui · Lenis (smooth scroll) · GSAP + ScrollTrigger (animation) · Manrope font (`next/font`). Fully static (SSG). Deploy target: Vercel.
 
 ## Brand (sampled from `Ambliq Solutions Assets/Logo with white BG.png`)
 - **Navy `#00183C`** — headings, dark sections, footer, text base.
