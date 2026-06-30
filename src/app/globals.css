@@ -160,6 +160,12 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .bg-brand-gradient { background: linear-gradient(135deg, #0C60FC 0%, #0C3C9C 100%); }
 .bg-navy-gradient { background: linear-gradient(120deg, #00183C 0%, #0A356E 60%, #0C3C9C 100%); }
 
+/* ── Float animation (used by Integrations token cluster) ────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
