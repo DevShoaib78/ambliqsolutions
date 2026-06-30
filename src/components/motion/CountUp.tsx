@@ -116,6 +116,7 @@ export default function CountUp({
         if (el) el.textContent = format(end)
       },
     })
+    return () => { liveTweenRef.current?.kill() }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [end]) // only `end` drives live updates; prefix/suffix/decimals are stable props
 

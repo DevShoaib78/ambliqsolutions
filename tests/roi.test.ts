@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { computeRoi } from '@/lib/roi'
 
 describe('computeRoi', () => {
-  it('computes the Ambotix example', () => {
+  it('computes the Ambliq example', () => {
     const r = computeRoi({ monthlyCalls: 500, missedRate: 30, conversionRate: 20, avgValue: 2500 })
     expect(r.missedCalls).toBe(150)
     expect(r.lostConversions).toBe(30)

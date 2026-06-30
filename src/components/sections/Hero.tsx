@@ -29,9 +29,10 @@ export default function Hero() {
   }, [])
 
   const { headline, accent, subhead } = site.hero
-  const idx    = headline.indexOf(accent)
-  const before = headline.slice(0, idx)
-  const after  = headline.slice(idx + accent.length)
+  const hasAccent = accent && headline.includes(accent)
+  const idx    = hasAccent ? headline.indexOf(accent) : -1
+  const before = hasAccent ? headline.slice(0, idx) : ''
+  const after  = hasAccent ? headline.slice(idx + accent.length) : ''
 
   return (
     <section
@@ -67,9 +68,13 @@ export default function Hero() {
           className="font-extrabold text-ink leading-tight tracking-tight mb-6"
           style={{ fontSize: 'clamp(2.25rem, 4.5vw + 1rem, 5rem)' }}
         >
-          {before}
-          <span className="text-gradient">{accent}</span>
-          {after}
+          {hasAccent ? (
+            <>
+              {before}
+              <span className="text-gradient">{accent}</span>
+              {after}
+            </>
+          ) : headline}
         </h1>
 
         <p

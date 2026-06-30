@@ -78,13 +78,7 @@ export default function Problem() {
 
           {/* ── Right: The Ambliq System ── */}
           <Reveal delay={0.2}>
-            <div
-              className="flex h-full flex-col rounded-2xl p-8 shadow-lg"
-              style={{
-                background: 'linear-gradient(145deg, #00183C 0%, #0A356E 100%)',
-                color: '#fff',
-              }}
-            >
+            <div className="flex h-full flex-col rounded-2xl p-8 shadow-lg bg-navy-gradient text-white">
               <h3 className="mb-6 text-xl font-bold">The Ambliq System</h3>
 
               {/* 2×2 benefit grid */}
