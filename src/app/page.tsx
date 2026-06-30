@@ -1,6 +1,9 @@
-import Hero     from '@/components/sections/Hero'
-import Problem  from '@/components/sections/Problem'
-import Features from '@/components/sections/Features'
+import Hero          from '@/components/sections/Hero'
+import Problem       from '@/components/sections/Problem'
+import Features      from '@/components/sections/Features'
+import RoiCalculator from '@/components/sections/RoiCalculator'
+import Results       from '@/components/sections/Results'
+import Services      from '@/components/sections/Services'
 
 export default function Home() {
   return (
@@ -8,7 +11,10 @@ export default function Home() {
       <Hero />
       <Problem />
       <Features />
-      {/* Results, Services, ROI, FAQ, CTA sections go here */}
+      <RoiCalculator />
+      <Results />
+      <Services />
+      {/* FAQ, CTA sections go here */}
     </main>
   )
 }
