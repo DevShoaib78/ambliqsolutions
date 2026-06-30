@@ -194,11 +194,22 @@ git commit -m "chore: scaffold Next.js 15 app with Tailwind v4, shadcn, Lenis, G
 **Interfaces:**
 - Produces: Tailwind utility classes for brand colors (`bg-navy-900`, `text-blue-500`, etc.), the `font-sans` = Manrope, `.text-gradient` and `.bg-brand-gradient` helpers, and global hidden-scrollbar behavior. All later tasks consume these.
 
-- [ ] **Step 1: Replace `src/app/globals.css` with brand tokens (Tailwind v4 `@theme`)**
+> **IMPORTANT — augment, don't replace.** Task 1's scaffold produced a `src/app/globals.css` that contains shadcn's Tailwind-v4 theme (`@import "tailwindcss"`, `@custom-variant dark`, `:root`/`.dark` with `--background`/`--foreground`/`--primary`/`--border`/`--input`/`--ring`/`--radius`, an `@theme inline` mapping, and a base `@layer`). The shadcn Button/Accordion/Input/Label depend on those variables — **do not delete them.** Read the existing file first, then make the targeted changes below.
 
+- [ ] **Step 1a: Read the existing `src/app/globals.css`** to see shadcn's generated structure. Keep all of it intact except the rebrand edits below.
+
+- [ ] **Step 1b: Rebrand shadcn variables in `:root`** — set the brand-relevant ones so shadcn primitives are on-brand (keep light theme; you may leave `.dark` as-is, the site is light-only):
 ```css
-@import "tailwindcss";
+/* in :root { ... } — change these values */
+--primary: #0C60FC;            /* electric blue */
+--primary-foreground: #ffffff;
+--ring: #0C60FC;
+--foreground: #0B1B33;         /* navy ink for body text */
+/* keep --background as white/oklch(1 ...) */
+```
 
+- [ ] **Step 1c: Append a brand `@theme` block** (Tailwind v4 merges multiple `@theme` blocks; this adds `bg-navy-900`, `text-blue-500`, `bg-surface`, `border-bordersoft`, `text-ink`, `text-ink-muted`, and makes `font-sans` = Manrope):
+```css
 @theme {
   --color-navy-950: #000C24;
   --color-navy-900: #00183C;
@@ -213,47 +224,38 @@ git commit -m "chore: scaffold Next.js 15 app with Tailwind v4, shadcn, Lenis, G
   --color-ink: #0B1B33;
   --color-ink-muted: #5A6B85;
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --radius-pill: 9999px;
 }
+```
 
-:root { color-scheme: light; }
+- [ ] **Step 1d: Append base styles + brand helpers** (after the existing `@layer base`):
+```css
+/* Hidden scrollbar site-wide (still scrollable) */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar { display: none; }
 
-html {
-  scrollbar-width: none;          /* Firefox */
-  -ms-overflow-style: none;       /* IE/old Edge */
-}
-html::-webkit-scrollbar { display: none; }  /* Chrome/Safari */
-
-body {
-  background: #ffffff;
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-}
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 
 .text-gradient {
   background: linear-gradient(135deg, #0C60FC 0%, #0C3C9C 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .bg-brand-gradient { background: linear-gradient(135deg, #0C60FC 0%, #0C3C9C 100%); }
 .bg-navy-gradient { background: linear-gradient(120deg, #00183C 0%, #0A356E 60%, #0C3C9C 100%); }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
 ```
 
-- [ ] **Step 2: Wire Manrope in `src/app/layout.tsx`**
-
+- [ ] **Step 2: Swap the scaffold's Geist font for Manrope in `src/app/layout.tsx`** — the scaffold imports `Geist`/`Geist_Mono`. Remove those and use Manrope; set it as the `--font-manrope` variable on `<html>` (and drop the geist className vars):
 ```tsx
 import { Manrope } from 'next/font/google'
 const manrope = Manrope({ subsets: ['latin'], weight: ['400','500','600','700','800'], variable: '--font-manrope', display: 'swap' })
-// on <html>: className={manrope.variable}
+// <html lang="en" className={manrope.variable}> ... and ensure body uses font-sans
 ```
+Also confirm shadcn's `@theme inline`/`:root` doesn't pin `--font-sans` to a Geist var; if it does, point it at `var(--font-manrope)`.
 
-- [ ] **Step 3: Verify tokens render** — temporarily put `<h1 className="text-gradient text-6xl font-extrabold">Ambliq</h1>` on the page, run `npm run shoot -- / tokens-check` (after Task 5 adds shoot; if not yet, run `npm run dev` and open). Confirm Manrope + blue gradient. Remove the temp markup.
+- [ ] **Step 3: Verify** — temporarily add `<h1 className="text-gradient text-6xl font-extrabold font-sans">Ambliq</h1>` plus `<button className="bg-primary text-primary-foreground px-4 py-2 rounded">btn</button>` to `page.tsx`, run `npm run build` (must pass) and `npm run dev`; open `http://localhost:3000`. Confirm: Manrope renders, the heading shows the blue gradient, the shadcn-styled button is electric blue (proving shadcn vars still work). Then REMOVE the temp markup.
 
 - [ ] **Step 4: Commit**
 
