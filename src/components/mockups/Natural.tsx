@@ -1,7 +1,7 @@
 export default function Natural() {
   const bubbles = [
     { from: 'user', text: 'Hi, I need to book an appointment' },
-    { from: 'ai',   text: "Of course! I can help with that — what day works for you?" },
+    { from: 'ai',   text: "Of course! I can help with that. What day works for you?" },
     { from: 'user', text: 'Thursday morning please' },
   ]
   return (

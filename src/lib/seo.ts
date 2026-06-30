@@ -8,7 +8,7 @@ export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: site.meta.title,
-    template: '%s — Ambliq Solutions',
+    template: '%s | Ambliq Solutions',
   },
   description: site.meta.description,
   openGraph: {
@@ -48,7 +48,7 @@ export function serviceJsonLd() {
     '@type': 'Service',
     name: 'AI Voice Agents',
     description:
-      'Human-like AI receptionists that answer calls, qualify callers, and book appointments — available around the clock without adding to your payroll.',
+      'Human-like AI receptionists that answer calls, qualify callers, and book appointments. Available around the clock without adding to your payroll.',
     provider: {
       '@type': 'Organization',
       name: 'Ambliq Solutions',

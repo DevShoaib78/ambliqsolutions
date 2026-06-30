@@ -174,9 +174,9 @@ export interface Site {
 export const site: Site = {
 
   meta: {
-    title: 'Ambliq Solutions — AI Automation for Service Businesses',
+    title: 'Ambliq Solutions: AI Automation for Service Businesses',
     description:
-      'Ambliq Solutions helps service-based businesses capture, qualify, and convert more leads using AI automation. Our AI Voice Agents answer calls 24/7, qualify leads, and book appointments — so you never miss an opportunity.',
+      'Ambliq Solutions helps service-based businesses capture, qualify, and convert more leads using AI automation. Our AI Voice Agents answer calls 24/7, qualify leads, and book appointments so you never miss an opportunity.',
   },
 
   nav: [
@@ -194,7 +194,7 @@ export const site: Site = {
     headline: 'Your AI Receptionist That Never Misses a Call',
     accent:   'Never Misses a Call',
     subhead:
-      "Most businesses lose customers before a human ever picks up the phone. Ambliq's AI Voice Agent answers every call, qualifies every lead, and books appointments around the clock — so your team focuses on doing the work, not chasing it.",
+      "Most businesses lose customers before a human ever picks up the phone. Ambliq's AI Voice Agent answers every call, qualifies every lead, and books appointments around the clock. Your team stays focused on doing the work, not chasing it.",
   },
 
   // ── Problem ─────────────────────────────────────────────────────────────────
@@ -236,7 +236,7 @@ export const site: Site = {
     {
       id:      'always-on',
       title:   'Answers Every Call, 24 / 7',
-      body:    "Your AI receptionist picks up on the first ring — whether it's 2 pm on a Tuesday or midnight on a Sunday. No more voicemail, no more missed opportunities because your office is closed.",
+      body:    "Your AI receptionist picks up on the first ring, whether it's 2 pm on a Tuesday or midnight on a Sunday. No more voicemail, no more missed opportunities because your office is closed.",
       mockup:  'always-on',
     },
     {
@@ -248,7 +248,7 @@ export const site: Site = {
     {
       id:      'booking',
       title:   'Books Appointments Automatically',
-      body:    'Once a lead qualifies, the agent checks your calendar and locks in a time — confirmed and on the books before the caller hangs up. No back-and-forth, no scheduling delays.',
+      body:    'Once a lead qualifies, the agent checks your calendar and locks in a time, confirmed and on the books before the caller hangs up. No back-and-forth, no scheduling delays.',
       mockup:  'booking',
     },
     {
@@ -260,13 +260,13 @@ export const site: Site = {
     {
       id:      'multicall',
       title:   'Handles Multiple Calls at Once',
-      body:    'A human receptionist can take one call at a time. Your AI agent has no such limit — every caller gets immediate attention, even during peak hours when phones would otherwise ring out.',
+      body:    'A human receptionist can take one call at a time. Your AI agent has no such limit. Every caller gets immediate attention, even during peak hours when phones would otherwise ring out.',
       mockup:  'multicall',
     },
     {
       id:      'natural',
       title:   'Sounds Natural, Works Multilingually',
-      body:    'The agent holds real conversations — not a phone tree, not a bot. It adapts to how people actually speak, handles interruptions, and can engage callers in multiple languages to serve a broader audience.',
+      body:    'The agent holds real conversations, not a phone tree and not a bot. It adapts to how people actually speak, handles interruptions, and can engage callers in multiple languages to serve a broader audience.',
       mockup:  'natural',
     },
   ],
@@ -326,7 +326,7 @@ export const site: Site = {
     eyebrow: 'Results',
     heading: 'Numbers That Speak for Themselves',
     accent:  'Speak for Themselves',
-    sub:     'Early client results and system benchmarks — real data from businesses using AI voice automation.',
+    sub:     'Early client results and system benchmarks: real data from businesses using AI voice automation.',
   },
 
   // ── Services ─────────────────────────────────────────────────────────────────
@@ -334,7 +334,7 @@ export const site: Site = {
     {
       id:    'voice-agents',
       title: 'AI Voice Agents',
-      body:  'Human-like AI receptionists that answer calls, qualify callers, and book appointments — available around the clock without adding to your payroll.',
+      body:  'Human-like AI receptionists that answer calls, qualify callers, and book appointments. Available around the clock without adding to your payroll.',
       icon:  'Phone',
     },
     {
@@ -385,7 +385,7 @@ export const site: Site = {
   integrationsHeader: {
     eyebrow: 'Integrations',
     heading: 'Plugs into the tools you already use',
-    body:    'Ambliq connects with the platforms your team relies on — CRMs, calendars, scheduling tools, and automation workflows — without disrupting how you work.',
+    body:    'Ambliq connects with the platforms your team relies on, including CRMs, calendars, scheduling tools, and automation workflows, without disrupting how you work.',
     cta:     'See How It Works',
   },
 
@@ -393,11 +393,11 @@ export const site: Site = {
   process: [
     {
       title: 'System Audit',
-      body:  "We start by mapping how leads currently enter your business, where they're being lost, and which parts of your workflow are best suited to automation. No generic templates — we look at your actual situation.",
+      body:  "We start by mapping how leads currently enter your business, where they're being lost, and which parts of your workflow are best suited to automation. No generic templates. We assess your actual situation.",
     },
     {
       title: 'Build & Integrate',
-      body:  'We build your AI Voice Agent and automation flows, then integrate them with your existing tools — your CRM, calendar, phone system, and any other software your team already uses.',
+      body:  'We build your AI Voice Agent and automation flows, then integrate them with your existing tools: your CRM, calendar, phone system, and any other software your team already uses.',
     },
     {
       title: 'Launch & Optimise',
@@ -415,22 +415,22 @@ export const site: Site = {
   finalCta: {
     heading: 'Stop Letting Missed Calls Decide Your Revenue',
     accent:  'Missed Calls',
-    sub:     "Book a 30-minute call with our team. We'll walk through your current lead flow, show you where automation fits, and give you a straight answer on what's possible — no hard sell, no obligation.",
+    sub:     "Book a 30-minute call with our team. We'll walk through your current lead flow, show you where automation fits, and give you a straight answer on what's possible. No hard sell, no obligation.",
   },
 
   // ── FAQ ──────────────────────────────────────────────────────────────────────
   faq: [
     {
       q: 'Will the AI voice agent sound robotic to my callers?',
-      a: "No. The agent uses natural conversational speech — it holds a proper back-and-forth, handles pauses, and adapts to how the caller communicates. Most callers don't realise they're speaking with an AI until the business tells them. You can also configure the agent to identify itself as an AI upfront if that's your preference.",
+      a: "No. The agent uses natural conversational speech. It holds a proper back-and-forth, handles pauses, and adapts to how the caller communicates. Most callers don't realise they're speaking with an AI until the business tells them. You can also configure the agent to identify itself as an AI upfront if that's your preference.",
     },
     {
       q: 'Does this replace my receptionist or existing staff?',
-      a: 'No. The AI agent handles the volume and triage work — answering every call, collecting information, qualifying leads, and booking appointments. Your team handles the relationships, the complex queries, and the work that actually requires a human. Most clients find their staff are less stressed and more productive, not redundant.',
+      a: 'No. The AI agent handles the volume and triage work: answering every call, collecting information, qualifying leads, and booking appointments. Your team handles the relationships, the complex queries, and the work that actually requires a human. Most clients find their staff are less stressed and more productive, not redundant.',
     },
     {
       q: "What happens when a caller asks something the agent can't answer?",
-      a: "The agent is designed with clear handoff points. If a caller has a question outside the agent's scope, it can take a message, offer to transfer to a staff member, or schedule a callback — whichever option fits your business. Nothing gets dropped.",
+      a: "The agent is designed with clear handoff points. If a caller has a question outside the agent's scope, it can take a message, offer to transfer to a staff member, or schedule a callback, whichever option fits your business. Nothing gets dropped.",
     },
     {
       q: 'How long does it take to get up and running?',
@@ -438,11 +438,11 @@ export const site: Site = {
     },
     {
       q: 'Which tools and systems does it integrate with?',
-      a: "We connect with the most common platforms used by service businesses — HubSpot, GoHighLevel, Salesforce, Calendly, Twilio, Zapier, Make, and Notion, among others. If you use something not on that list, get in touch and we'll confirm compatibility before you commit.",
+      a: "We connect with the most common platforms used by service businesses, including HubSpot, GoHighLevel, Salesforce, Calendly, Twilio, Zapier, Make, and Notion, among others. If you use something not on that list, get in touch and we'll confirm compatibility before you commit.",
     },
     {
       q: 'How is Ambliq Solutions priced?',
-      a: "Pricing depends on call volume, the complexity of your qualification criteria, and the integrations required. We don't publish a fixed price list because every setup is different. Book a discovery call and we'll give you a clear, itemised quote — no surprises.",
+      a: "Pricing depends on call volume, the complexity of your qualification criteria, and the integrations required. We don't publish a fixed price list because every setup is different. Book a discovery call and we'll give you a clear, itemised quote with no surprises.",
     },
   ],
 
@@ -473,7 +473,7 @@ export const site: Site = {
     eyebrow:         'Free Consultation',
     heading:         'Book your free AI audit call',
     accent:          'AI audit call',
-    sub:             'A 30-minute session where we map your current lead flow, identify where calls are being lost, and show you exactly what AI automation can recover. No hard sell — just a straight answer.',
+    sub:             'A 30-minute session where we map your current lead flow, identify where calls are being lost, and show you exactly what AI automation can recover. No hard sell, just a straight answer.',
     calendlyUrl:     'https://calendly.com/umarshoaibdev/30min',
     fallbackHeading: 'Booking opens soon',
     fallbackBody:    'Our calendar is almost ready. In the meantime, reach out directly and we will get you scheduled right away.',
@@ -481,7 +481,7 @@ export const site: Site = {
       'We map your current inbound call and lead flow',
       'Identify exactly where leads are slipping through the cracks',
       'Show you what an AI Voice Agent would do differently',
-      'Give you a clear, itemised quote — no surprises',
+      'Give you a clear, itemised quote with no surprises',
     ],
   },
 
