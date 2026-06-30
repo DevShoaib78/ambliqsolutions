@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import Container from '@/components/common/Container'
 import CtaButton from '@/components/common/CtaButton'
 import { site } from '@/content/site'
+import AuroraBackground from '@/components/ui/AuroraBackground'
 
 export default function Hero() {
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -39,27 +40,8 @@ export default function Hero() {
       className="relative flex min-h-[92vh] items-center justify-center overflow-hidden pt-28 pb-24"
       aria-labelledby="hero-heading"
     >
-      {/* Soft electric-blue radial glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(ellipse 85% 55% at 50% 0%, rgba(12,96,252,0.10) 0%, transparent 68%)',
-        }}
-      />
-      {/* Subtle streak left */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full opacity-20 blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(12,96,252,0.25) 0%, transparent 70%)' }}
-      />
-      {/* Subtle streak right */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-32 top-1/3 h-96 w-96 rounded-full opacity-20 blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(12,96,252,0.15) 0%, transparent 70%)' }}
-      />
+      {/* Soft Aurora background (WebGL, client-only, reduced-motion safe) */}
+      <AuroraBackground />
 
       <Container className="relative z-10 text-center">
         <h1
