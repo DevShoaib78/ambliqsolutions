@@ -36,26 +36,35 @@ export default function CountUp({
       return
     }
 
+    // Defensively register here: React fires child effects before parent effects,
+    // so this guarantees the plugin is registered before any child uses it.
     gsap.registerPlugin(ScrollTrigger)
 
     const obj = { v: 0 }
-    el.textContent = format(0)
+    // Do NOT reset textContent to 0 here — the span already SSR-renders the
+    // final value. Resetting on mount would cause a visible flash (end → 0)
+    // before ScrollTrigger fires. Instead, reset to 0 only inside onEnter,
+    // so the count-up plays when the element actually enters the viewport.
 
     const ctx = gsap.context(() => {
-      gsap.to(obj, {
-        v: end,
-        duration: 1.6,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          once: true,
-        },
-        onUpdate: () => {
-          if (el) el.textContent = format(obj.v)
-        },
-        onComplete: () => {
-          if (el) el.textContent = format(end)
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          obj.v = 0
+          el.textContent = format(0)
+          gsap.to(obj, {
+            v: end,
+            duration: 1.6,
+            ease: 'power2.out',
+            onUpdate: () => {
+              if (el) el.textContent = format(obj.v)
+            },
+            onComplete: () => {
+              if (el) el.textContent = format(end)
+            },
+          })
         },
       })
     })

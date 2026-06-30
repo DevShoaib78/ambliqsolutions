@@ -11,6 +11,8 @@ const b = await chromium.launch()
 for (const w of widths) {
   const ctx = await b.newContext({ viewport: { width: w, height: 900 }, deviceScaleFactor: 1 })
   const p = await ctx.newPage()
+  // domcontentloaded rather than networkidle: Next.js HMR keeps a WebSocket
+  // open so networkidle never resolves, which would yield blank screenshots.
   await p.goto(`http://localhost:3000${route}`, { waitUntil: 'domcontentloaded' }).catch(() => {})
   await p.waitForTimeout(3000)
   // trigger scroll animations

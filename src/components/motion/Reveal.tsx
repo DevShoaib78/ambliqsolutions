@@ -25,6 +25,8 @@ export default function Reveal({ children, as, className, delay = 0 }: RevealPro
       return
     }
 
+    // Defensively register: React fires child effects before parent effects,
+    // so this guarantees the plugin is registered before any child uses it.
     gsap.registerPlugin(ScrollTrigger)
 
     const ctx = gsap.context(() => {
@@ -38,6 +40,12 @@ export default function Reveal({ children, as, className, delay = 0 }: RevealPro
           trigger: el,
           start: 'top 85%',
           once: true,
+        },
+        // If the tween is interrupted mid-flight (e.g. component unmount while
+        // the FROM opacity:0 is applied), restore visibility so the element is
+        // never left stranded invisible.
+        onInterrupt: () => {
+          gsap.set(el, { clearProps: 'opacity,transform' })
         },
       })
     })
