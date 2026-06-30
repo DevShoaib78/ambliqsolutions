@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 }
 
-const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL
+const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL ?? site.bookPage.calendlyUrl
 
 export default function BookPage() {
   return (

@@ -132,6 +132,8 @@ export interface BookPageCopy {
   heading: string
   accent: string
   sub: string
+  /** Calendly scheduling URL. When set, /book renders the live calendar; otherwise it shows the fallback card. Overridable via NEXT_PUBLIC_CALENDLY_URL. */
+  calendlyUrl: string
   fallbackHeading: string
   fallbackBody: string
   whatToExpect: string[]
@@ -472,6 +474,7 @@ export const site: Site = {
     heading:         'Book your free AI audit call',
     accent:          'AI audit call',
     sub:             'A 30-minute session where we map your current lead flow, identify where calls are being lost, and show you exactly what AI automation can recover. No hard sell — just a straight answer.',
+    calendlyUrl:     'https://calendly.com/umarshoaibdev/30min',
     fallbackHeading: 'Booking opens soon',
     fallbackBody:    'Our calendar is almost ready. In the meantime, reach out directly and we will get you scheduled right away.',
     whatToExpect: [
