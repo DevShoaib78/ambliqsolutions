@@ -121,7 +121,8 @@ Scrollbar visually hidden site-wide while remaining fully scrollable: `html{ scr
 Mobile-first. Tested breakpoints ≈ **390 / 768 / 1024 / 1440px**. Fluid `clamp()` typography, hamburger nav on mobile, grids collapse (3-col → 1-col), comparison columns stack, calculator stacks inputs/outputs. **Verified with Playwright screenshots at each width before sign-off** — not assumed.
 
 ### SEO
-Next Metadata API (title/description/canonical), OpenGraph + Twitter cards, **JSON-LD** (`Organization` + `Service`), `sitemap.ts`, `robots.ts`, semantic landmarks, descriptive alt text, sensible heading order.
+- **Canonical domain:** `https://ambliqsolutions.com` (Umar's purchased domain) — set as Next `metadataBase`; all OG/canonical/sitemap URLs derive from it. Store as `NEXT_PUBLIC_SITE_URL` env var (defaulting to this) so it's overridable per environment.
+- Next Metadata API (title/description/canonical), OpenGraph + Twitter cards, **JSON-LD** (`Organization` + `Service`, with `url`, `logo`, `sameAs` → LinkedIn company + Umar), `sitemap.ts`, `robots.ts`, semantic landmarks, descriptive alt text, sensible heading order.
 
 ### Performance
 Fully static (SSG). No heavy raster images (visuals are SVG/CSS). `next/font` for Manrope. GSAP/Lenis lazy-loaded client-side. Target Lighthouse: Performance ≥ 90, SEO/Best-Practices/Accessibility ≥ 95.
