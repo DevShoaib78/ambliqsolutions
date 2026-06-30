@@ -50,13 +50,13 @@
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: #0B1B33;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: #0C60FC;
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -66,7 +66,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: #0C60FC;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -127,4 +127,40 @@
   html {
     @apply font-sans;
   }
+}
+
+/* ── Brand design tokens ─────────────────────────────────────────── */
+@theme {
+  --color-navy-950: #000C24;
+  --color-navy-900: #00183C;
+  --color-navy-800: #052450;
+  --color-navy-700: #0A356E;
+  --color-blue-700: #0C3C9C;
+  --color-blue-600: #0C48B4;
+  --color-blue-500: #0C60FC;
+  --color-blue-400: #3B82F6;
+  --color-surface: #F4F7FC;
+  --color-bordersoft: #E3E9F2;
+  --color-ink: #0B1B33;
+  --color-ink-muted: #5A6B85;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Hidden scrollbar (still scrollable) ────────────────────────── */
+html { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar { display: none; }
+
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+/* ── Brand gradient helpers ─────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #0C60FC 0%, #0C3C9C 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.bg-brand-gradient { background: linear-gradient(135deg, #0C60FC 0%, #0C3C9C 100%); }
+.bg-navy-gradient { background: linear-gradient(120deg, #00183C 0%, #0A356E 60%, #0C3C9C 100%); }
+
+/* ── Reduced motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
