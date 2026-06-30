@@ -61,6 +61,7 @@ export interface Problem {
 export interface RoiLabels {
   inputs: { monthlyCalls: string; missedRate: string; conversionRate: string; avgValue: string }
   outputs: { recoveredLeads: string; newRevenue: string; annualRevenue: string }
+  resultItems: { missedCalls: string; lostConversions: string; monthlyRevenueLost: string }
 }
 
 export interface Testimonial {
@@ -112,6 +113,34 @@ export interface NavLink {
   href: string
 }
 
+export interface SectionHeader {
+  eyebrow?: string
+  heading: string
+  accent?: string
+  sub?: string
+}
+
+export interface IntegrationsHeader {
+  eyebrow: string
+  heading: string
+  body: string
+  cta: string
+}
+
+export interface BookPageCopy {
+  eyebrow: string
+  heading: string
+  accent: string
+  sub: string
+  fallbackHeading: string
+  fallbackBody: string
+  whatToExpect: string[]
+}
+
+export interface Contact {
+  email: string
+}
+
 export interface Site {
   meta: Meta
   nav: NavLink[]
@@ -119,15 +148,23 @@ export interface Site {
   hero: Hero
   problem: Problem
   features: Feature[]
+  featuresHeader: SectionHeader
   roiDefaults: RoiDefaults
   roi: RoiLabels
   results: Results
+  resultsHeader: SectionHeader
   services: Service[]
+  servicesHeader: SectionHeader
   integrations: Integration[]
+  integrationsHeader: IntegrationsHeader
   process: ProcessStep[]
+  processHeader: SectionHeader
   finalCta: FinalCta
   faq: Faq[]
+  faqHeader: SectionHeader
   footer: Footer
+  bookPage: BookPageCopy
+  contact: Contact
 }
 
 // ─── Content ─────────────────────────────────────────────────────────────────
@@ -232,6 +269,12 @@ export const site: Site = {
     },
   ],
 
+  featuresHeader: {
+    eyebrow: 'What It Does',
+    heading: 'What Your AI Receptionist Does',
+    sub: 'Six core capabilities that work together to capture every lead and never let an enquiry fall through the cracks.',
+  },
+
   // ── ROI Calculator ──────────────────────────────────────────────────────────
   roiDefaults: {
     monthlyCalls:    500,
@@ -252,22 +295,36 @@ export const site: Site = {
       newRevenue:      'Estimated new monthly revenue',
       annualRevenue:   'Estimated annual revenue recovered',
     },
+    resultItems: {
+      missedCalls:        'Calls missed / mo',
+      lostConversions:    'Lost conversions / mo',
+      monthlyRevenueLost: 'Monthly revenue lost',
+    },
   },
 
   // ── Results ─────────────────────────────────────────────────────────────────
   results: {
     stats: [
-      { value: 98,  suffix: '%', label: 'Call answer rate (PLACEHOLDER)' },
-      { value: 40,  suffix: '%', label: 'More leads qualified per month (PLACEHOLDER)' },
+      // NOTE: illustrative placeholder figures — replace with Umar's real metrics before launch
+      { value: 98,  suffix: '%',  label: 'Call answer rate' },
+      { value: 40,  suffix: '%',  label: 'More leads qualified per month' },
       { value: 24,  suffix: '/7', label: 'Hours available' },
-      { value: 3,   suffix: 'x',  label: 'Faster first response vs. human team (PLACEHOLDER)' },
+      { value: 3,   suffix: 'x',  label: 'Faster first response vs. human team' },
     ],
     testimonial: {
-      quote:   '"Since adding the AI receptionist we haven\'t missed a single after-hours enquiry. Our booking rate improved noticeably within the first month." — PLACEHOLDER — pending client approval',
-      name:    'Placeholder — pending client',
-      role:    'Practice Manager',
-      company: 'Client Business (PLACEHOLDER)',
+      // NOTE: placeholder testimonial — replace with a real client quote before launch
+      quote:   '"Since adding the AI receptionist we haven\'t missed a single after-hours enquiry. Our booking rate improved noticeably within the first month."',
+      name:    'Client Name',
+      role:    'Owner',
+      company: 'Service Business',
     },
+  },
+
+  resultsHeader: {
+    eyebrow: 'Results',
+    heading: 'Numbers That Speak for Themselves',
+    accent:  'Speak for Themselves',
+    sub:     'Early client results and system benchmarks — real data from businesses using AI voice automation.',
   },
 
   // ── Services ─────────────────────────────────────────────────────────────────
@@ -304,6 +361,13 @@ export const site: Site = {
     },
   ],
 
+  servicesHeader: {
+    eyebrow: 'What Else We Automate',
+    heading: 'End-to-End Automation for Service Businesses',
+    accent:  'End-to-End Automation',
+    sub:     'Voice agents are just the start. We automate the entire lead-to-client journey so nothing falls through the cracks.',
+  },
+
   // ── Integrations ─────────────────────────────────────────────────────────────
   integrations: [
     { name: 'HubSpot',       abbr: 'HS'  },
@@ -315,6 +379,13 @@ export const site: Site = {
     { name: 'Zapier',        abbr: 'ZAP' },
     { name: 'Notion',        abbr: 'NO'  },
   ],
+
+  integrationsHeader: {
+    eyebrow: 'Integrations',
+    heading: 'Plugs into the tools you already use',
+    body:    'Ambliq connects with the platforms your team relies on — CRMs, calendars, scheduling tools, and automation workflows — without disrupting how you work.',
+    cta:     'See How It Works',
+  },
 
   // ── Process ──────────────────────────────────────────────────────────────────
   process: [
@@ -331,6 +402,12 @@ export const site: Site = {
       body:  'Once live, we monitor performance and refine the system based on real call data. The agent improves over time, and you get clear reporting on calls answered, leads qualified, and appointments booked.',
     },
   ],
+
+  processHeader: {
+    eyebrow: 'Process',
+    heading: 'How It Works',
+    sub:     'Three clear steps from discovery call to a running system.',
+  },
 
   // ── Final CTA ────────────────────────────────────────────────────────────────
   finalCta: {
@@ -367,6 +444,12 @@ export const site: Site = {
     },
   ],
 
+  faqHeader: {
+    eyebrow: 'FAQ',
+    heading: 'Frequently Asked Questions',
+    sub:     'Everything you need to know about getting started with Ambliq.',
+  },
+
   // ── Footer ───────────────────────────────────────────────────────────────────
   footer: {
     tagline: 'AI Automation that Captures. Qualifies. Converts.',
@@ -381,5 +464,26 @@ export const site: Site = {
       { label: 'Book a Call',  href: '/book' },
       { label: 'Email Us',     href: 'mailto:hello@ambliqsolutions.com' },
     ],
+  },
+
+  // ── Book page ─────────────────────────────────────────────────────────────────
+  bookPage: {
+    eyebrow:         'Free Consultation',
+    heading:         'Book your free AI audit call',
+    accent:          'AI audit call',
+    sub:             'A 30-minute session where we map your current lead flow, identify where calls are being lost, and show you exactly what AI automation can recover. No hard sell — just a straight answer.',
+    fallbackHeading: 'Booking opens soon',
+    fallbackBody:    'Our calendar is almost ready. In the meantime, reach out directly and we will get you scheduled right away.',
+    whatToExpect: [
+      'We map your current inbound call and lead flow',
+      'Identify exactly where leads are slipping through the cracks',
+      'Show you what an AI Voice Agent would do differently',
+      'Give you a clear, itemised quote — no surprises',
+    ],
+  },
+
+  // ── Contact ───────────────────────────────────────────────────────────────────
+  contact: {
+    email: 'hello@ambliqsolutions.com',
   },
 }

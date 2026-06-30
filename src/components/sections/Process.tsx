@@ -10,9 +10,9 @@ export default function Process() {
 
         <Reveal>
           <SectionHeading
-            eyebrow="Process"
-            heading="How It Works"
-            sub="Three clear steps from discovery call to a running system."
+            eyebrow={site.processHeader.eyebrow}
+            heading={site.processHeader.heading}
+            sub={site.processHeader.sub}
             className="mb-16"
           />
         </Reveal>

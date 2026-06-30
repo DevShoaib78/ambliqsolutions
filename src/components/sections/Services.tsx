@@ -18,10 +18,10 @@ export default function Services() {
       <Container>
         <Reveal>
           <SectionHeading
-            eyebrow="What Else We Automate"
-            heading="End-to-End Automation for Service Businesses"
-            accent="End-to-End Automation"
-            sub="Voice agents are just the start. We automate the entire lead-to-client journey so nothing falls through the cracks."
+            eyebrow={site.servicesHeader.eyebrow}
+            heading={site.servicesHeader.heading}
+            accent={site.servicesHeader.accent}
+            sub={site.servicesHeader.sub}
             className="mb-14"
           />
         </Reveal>

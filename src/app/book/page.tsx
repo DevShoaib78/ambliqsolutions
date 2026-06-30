@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Container from '@/components/common/Container'
 import CalendlyEmbed from '@/components/book/CalendlyEmbed'
 import { Mail, ArrowLeft, CalendarClock } from 'lucide-react'
+import { site } from '@/content/site'
 
 export const metadata: Metadata = {
   title: 'Book a Call',
@@ -23,16 +24,14 @@ export default function BookPage() {
         <Container>
           <div className="max-w-2xl mx-auto text-center">
             <p className="text-xs font-bold uppercase tracking-widest text-blue-500 mb-4">
-              Free Consultation
+              {site.bookPage.eyebrow}
             </p>
             <h1 className="text-4xl sm:text-5xl font-bold text-ink leading-tight mb-4">
-              Book your free{' '}
-              <span className="text-gradient">AI audit call</span>
+              {site.bookPage.heading.replace(site.bookPage.accent, '')}
+              <span className="text-gradient">{site.bookPage.accent}</span>
             </h1>
             <p className="text-base sm:text-lg text-ink-muted">
-              A 30-minute session where we map your current lead flow, identify where
-              calls are being lost, and show you exactly what AI automation can recover.
-              No hard sell — just a straight answer.
+              {site.bookPage.sub}
             </p>
           </div>
         </Container>
@@ -76,20 +75,19 @@ function BookingFallback() {
 
         {/* Heading */}
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-          Booking opens soon
+          {site.bookPage.fallbackHeading}
         </h2>
         <p className="text-white/70 text-base sm:text-lg mb-8 leading-relaxed">
-          Our calendar is almost ready. In the meantime, reach out directly and
-          we will get you scheduled right away.
+          {site.bookPage.fallbackBody}
         </p>
 
         {/* Email CTA */}
         <a
-          href="mailto:hello@ambliqsolutions.com"
+          href={`mailto:${site.contact.email}`}
           className="inline-flex items-center gap-2.5 bg-blue-500 hover:bg-blue-600 text-white font-bold text-sm rounded-full px-7 py-3.5 transition-colors shadow-lg hover:shadow-blue-500/40"
         >
           <Mail className="w-4 h-4" />
-          hello@ambliqsolutions.com
+          {site.contact.email}
         </a>
 
         {/* Divider */}
@@ -100,12 +98,7 @@ function BookingFallback() {
           What to expect on the call
         </p>
         <ul className="space-y-2 text-left text-white/70 text-sm">
-          {[
-            'We map your current inbound call and lead flow',
-            'Identify exactly where leads are slipping through the cracks',
-            'Show you what an AI Voice Agent would do differently',
-            'Give you a clear, itemised quote — no surprises',
-          ].map((item) => (
+          {site.bookPage.whatToExpect.map((item) => (
             <li key={item} className="flex items-start gap-2.5">
               <span className="mt-0.5 w-4 h-4 flex-shrink-0 rounded-full bg-blue-500/30 flex items-center justify-center">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />

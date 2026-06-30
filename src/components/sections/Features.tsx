@@ -26,9 +26,9 @@ export default function Features() {
       <Container>
         <Reveal>
           <SectionHeading
-            eyebrow="What It Does"
-            heading="What Your AI Receptionist Does"
-            sub="Six core capabilities that work together to capture every lead and never let an enquiry fall through the cracks."
+            eyebrow={site.featuresHeader.eyebrow}
+            heading={site.featuresHeader.heading}
+            sub={site.featuresHeader.sub}
           />
         </Reveal>
 

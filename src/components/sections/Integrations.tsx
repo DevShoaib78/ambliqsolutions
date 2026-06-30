@@ -18,17 +18,16 @@ export default function Integrations() {
           <div className="flex-1 text-center lg:text-left">
             <Reveal>
               <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-4">
-                Integrations
+                {site.integrationsHeader.eyebrow}
               </p>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5">
-                Plugs into the tools you already use
+                {site.integrationsHeader.heading}
               </h2>
               <p className="text-white/70 text-base sm:text-lg mb-8 max-w-md mx-auto lg:mx-0">
-                Ambliq connects with the platforms your team relies on — CRMs, calendars,
-                scheduling tools, and automation workflows — without disrupting how you work.
+                {site.integrationsHeader.body}
               </p>
               <CtaButton variant="gradient">
-                See How It Works
+                {site.integrationsHeader.cta}
               </CtaButton>
             </Reveal>
           </div>

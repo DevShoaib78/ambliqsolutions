@@ -12,10 +12,10 @@ export default function Results() {
       <Container>
         <Reveal>
           <SectionHeading
-            eyebrow="Results"
-            heading="Numbers That Speak for Themselves"
-            accent="Speak for Themselves"
-            sub="Early client results and system benchmarks — real data from businesses using AI voice automation."
+            eyebrow={site.resultsHeader.eyebrow}
+            heading={site.resultsHeader.heading}
+            accent={site.resultsHeader.accent}
+            sub={site.resultsHeader.sub}
             className="mb-14"
           />
         </Reveal>

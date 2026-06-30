@@ -80,15 +80,15 @@ export default function RoiCalculator() {
           <div className="bg-navy-gradient flex flex-col rounded-2xl p-6 sm:p-8 text-white">
             <div className="grid grid-cols-2 gap-x-6 gap-y-5 mb-6">
               <ResultItem
-                label="Calls missed / mo"
+                label={site.roi.resultItems.missedCalls}
                 value={result.missedCalls.toLocaleString()}
               />
               <ResultItem
-                label="Lost conversions / mo"
+                label={site.roi.resultItems.lostConversions}
                 value={result.lostConversions.toLocaleString()}
               />
               <ResultItem
-                label="Monthly revenue lost"
+                label={site.roi.resultItems.monthlyRevenueLost}
                 value={`$${result.monthlyRevenueLost.toLocaleString()}`}
                 wide
               />

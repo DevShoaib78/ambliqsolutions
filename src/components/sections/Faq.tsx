@@ -16,9 +16,9 @@ export default function Faq() {
 
         <Reveal>
           <SectionHeading
-            eyebrow="FAQ"
-            heading="Frequently Asked Questions"
-            sub="Everything you need to know about getting started with Ambliq."
+            eyebrow={site.faqHeader.eyebrow}
+            heading={site.faqHeader.heading}
+            sub={site.faqHeader.sub}
             className="mb-12"
           />
         </Reveal>
