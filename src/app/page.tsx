@@ -5,6 +5,7 @@ import RoiCalculator from '@/components/sections/RoiCalculator'
 import Results       from '@/components/sections/Results'
 import Services      from '@/components/sections/Services'
 import Integrations  from '@/components/sections/Integrations'
+import Process       from '@/components/sections/Process'
 
 export default function Home() {
   return (
@@ -16,7 +17,8 @@ export default function Home() {
       <Results />
       <Services />
       <Integrations />
-      {/* Process, CTA, FAQ sections go here */}
+      <Process />
+      {/* CTA, FAQ sections go here */}
     </main>
   )
 }
