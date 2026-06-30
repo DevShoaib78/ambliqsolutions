@@ -36,3 +36,6 @@ coverage/
 
 # SDD scratch
 .superpowers/
+
+# QA screenshots
+docs/verify/
