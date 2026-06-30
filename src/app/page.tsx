@@ -7,6 +7,7 @@ import Services      from '@/components/sections/Services'
 import Integrations  from '@/components/sections/Integrations'
 import Process       from '@/components/sections/Process'
 import FinalCta      from '@/components/sections/FinalCta'
+import Faq           from '@/components/sections/Faq'
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
       <Integrations />
       <Process />
       <FinalCta />
-      {/* FAQ section goes here */}
+      <Faq />
     </main>
   )
 }
