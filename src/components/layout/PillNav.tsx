@@ -175,26 +175,21 @@ const PillNav: React.FC<PillNavProps> = ({
         >
           {/* Logo lockup: AS mark + wordmark */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0 min-w-0" aria-label="Ambliq Solutions home">
-            <div
-              className="rounded-full overflow-hidden flex items-center justify-center shrink-0"
-              style={{ width: '44px', height: '44px' }}
-            >
-              <Image
-                src="/brand/logo-mini.webp"
-                alt=""
-                width={44}
-                height={44}
-                className="object-contain w-full h-full"
-                priority
-              />
-            </div>
+            <Image
+              src="/brand/logo-mini.webp"
+              alt=""
+              width={732}
+              height={408}
+              className="h-9 w-auto sm:h-10 shrink-0"
+              priority
+            />
             {/* Wordmark: hidden on very small (< sm) to prevent overflow */}
             <Image
               src="/brand/logo-text.webp"
               alt="Ambliq Solutions"
-              width={148}
-              height={28}
-              className="object-contain h-[26px] w-auto hidden sm:block"
+              width={1032}
+              height={211}
+              className="h-[22px] w-auto sm:h-[26px] hidden sm:block"
               priority
             />
           </Link>
