@@ -33,3 +33,6 @@ Thumbs.db
 # Misc
 .vercel
 coverage/
+
+# SDD scratch
+.superpowers/
