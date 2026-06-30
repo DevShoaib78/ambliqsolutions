@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ambliq Solutions
 
-## Getting Started
+Marketing website for **Ambliq Solutions**, an AI automation agency. Its AI Voice Agents answer calls 24/7, qualify leads, and book appointments so service businesses never miss an opportunity.
 
-First, run the development server:
+🔗 **[ambliqsolutions.com](https://ambliqsolutions.com)**
+
+## Tech stack
+
+Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui · Lenis · GSAP · Manrope. Statically generated for performance and SEO.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Local dev server |
+| `npm run build` / `npm start` | Production build / serve |
+| `npm test` | Run the test suite (Vitest) |
+| `npm run assets` | Regenerate brand logos + favicon from source art |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+src/
+  app/                 Routes (/, /book), layout, SEO (sitemap, robots, OG image)
+  components/
+    sections/          Landing-page sections
+    layout/            Navbar (pill nav) + footer
+    common/            Shared UI (container, CTA, headings, logo)
+    motion/            Smooth scroll + scroll animations
+    mockups/           SVG/CSS feature illustrations
+  content/site.ts      All site copy and content (single source of truth)
+  lib/                 ROI calculator + SEO helpers
+public/brand/          Logos (WebP)
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Optional environment variables:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `NEXT_PUBLIC_SITE_URL` — canonical site URL (defaults to `https://ambliqsolutions.com`)
+- `NEXT_PUBLIC_CALENDLY_URL` — booking calendar URL (a default is set in `src/content/site.ts`)
 
-## Deploy on Vercel
+## Editing content
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All headlines, copy, services, FAQs, stats, and the booking link live in **`src/content/site.ts`** — update that one file to change site content without touching layout.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Optimized for [Vercel](https://vercel.com) (zero-config Next.js). Connect the repo and deploy; set the environment variables above in the project settings.

@@ -9,43 +9,58 @@ Core message: *Every missed call is a missed opportunity. Every fast response is
 
 - **Domain:** https://ambliqsolutions.com
 - **Design anchor:** mirror https://www.futureflowai.co.uk/ (recolored to Ambliq's brand). ROI calculator + Results blocks adapted from https://www.ambotix.com/.
-- **Full design spec:** `docs/superpowers/specs/2026-06-30-ambliq-website-design.md` — read this first.
+- **Full design spec:** `docs/superpowers/specs/2026-06-30-ambliq-website-design.md`. Reference screenshots in `docs/references/futureflow/`.
 
-## Status
-Built. All plan tasks complete on branch `feat/website-build` — landing page (10 sections: Hero, Problem, Features, ROI calculator, Results, Services, Integrations, Process, Final CTA, FAQ) + `/book` + SEO. Responsive (390/768/1024/1440) and reduced-motion verified; production build green; all pages static (SSG). Pending from Umar: Calendly URL (`NEXT_PUBLIC_CALENDLY_URL`), real testimonials/stats/integration logos, and a white/inverted logo variant for dark sections.
+## Repo & git
+- **GitHub:** https://github.com/DevShoaib78/ambliqsolutions (default branch `main`).
+- **Active dev branch:** `feat/website-build`.
+- **COMMIT RULE (important):** commits must show **only `DevShoaib78` (Mohammed Shoaib Choudry)** as author. **Never add a `Co-Authored-By:` trailer or any AI/Claude attribution** to commit messages in this repo. Plain commit messages only.
+
+## Status (current)
+Built and functional. Landing page (10 sections: Hero, Problem, Features, ROI calculator, Results, Services, Integrations, Process, Final CTA, FAQ) + `/book` (with the **live Calendly calendar**) + SEO. Responsive (390/768/1024/1440) and reduced-motion verified; production build green; pages static (SSG). The React Bits **Pill Nav** navbar (enlarged AS-mark + wordmark lockup) and the **Aurora hero background** are in. Em dashes have been removed from all user-facing copy.
+- `main` on GitHub has the original build; the latest navbar/aurora/favicon/copy tweaks are committed on `feat/website-build` and may not be pushed yet — push when ready.
 
 ## Tech stack
-Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui · Lenis (smooth scroll) · GSAP + ScrollTrigger (animation) · Manrope font (`next/font`). Fully static (SSG). Deploy target: Vercel.
+Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · shadcn/ui (base-ui) · Lenis (smooth scroll) · GSAP + ScrollTrigger · Manrope (`next/font`) · **React Bits** (Pill Nav + Aurora, copied from github.com/DavidHDev/react-bits) · **ogl** (WebGL, for the aurora) · sharp (asset pipeline) · Vitest · Playwright. Fully static (SSG). Deploy target: Vercel.
 
-## Brand (sampled from `Ambliq Solutions Assets/Logo with white BG.png`)
+## Brand (sampled from the logo)
 - **Navy `#00183C`** — headings, dark sections, footer, text base.
 - **Electric Blue `#0C60FC`** — primary accent: CTAs, gradient words, icons, glows.
-- **Brand gradient** `linear-gradient(135deg,#0C60FC,#0C3C9C)` (the logo's "S" gradient).
-- Font: **Manrope**. Full token table in the spec §2.
-- Recolor mapping from FutureFlow: their violet `#7C3AED` → our `#0C60FC`; their slate `#0F172A` → our `#00183C`.
+- **Brand gradient** `linear-gradient(135deg,#0C60FC,#0C3C9C)`. Font: **Manrope**. Full token table in the spec §2 / `src/app/globals.css`.
 
 ## Hard requirements (do not regress)
-- **Fully responsive** on mobile/tablet/desktop. Mobile-first. Verify with Playwright screenshots at **390 / 768 / 1024 / 1440px** before claiming done — don't assume.
-- **Scrollbar hidden site-wide** while staying fully scrollable (`scrollbar-width:none` + `::-webkit-scrollbar{display:none}` + Lenis).
-- Respect `prefers-reduced-motion` for all animation.
-- Performance + SEO are priorities: static output, no heavy raster images (visuals are SVG/CSS), `metadataBase` = the domain, JSON-LD, sitemap, robots.
+- **Fully responsive**, mobile-first. Verify with Playwright at **390 / 768 / 1024 / 1440px** — don't assume.
+- **Scrollbar hidden site-wide** while scrollable (`scrollbar-width:none` + `::-webkit-scrollbar{display:none}` + Lenis).
+- Respect `prefers-reduced-motion` for all animation (incl. the aurora).
+- Static output, SEO + performance are priorities (`metadataBase` = the domain, JSON-LD, sitemap, robots).
+- **No em dashes** in user-facing copy (keep it this way).
 
-## Conventions
-- **All copy/content lives in `src/content/site.ts`** (typed) — headlines, stats, testimonials, features, services, integration logos, FAQ, ROI defaults. Currently placeholders (no real client data yet); swapping in real content must require NO layout changes.
-- **Feature visuals are code** (SVG/CSS in `src/components/mockups/*`), not images — recolorable to brand, near-zero weight.
-- **Booking** is a separate `/book` page with a Calendly embed driven by `NEXT_PUBLIC_CALENDLY_URL` (placeholder until Umar provides his link); graceful fallback if unset. All "Book a Call" CTAs link to `/book`.
-- **Assets:** used logos copied into `public/brand/` and converted to **WebP** (PNG fallback for the logo) via `scripts/convert-assets.mjs`. Source assets stay in `Ambliq Solutions Assets/`.
-- ROI calc logic is a pure, unit-tested function in `src/lib/roi.ts` (formula in spec §5).
+## Structure & conventions
+- **All copy/content lives in `src/content/site.ts`** (typed `Site`). Swapping real content must need NO layout change. The Calendly URL is `site.bookPage.calendlyUrl` (currently `calendly.com/umarshoaibdev/30min`, live), overridable via `NEXT_PUBLIC_CALENDLY_URL`.
+- Sections in `src/components/sections/*`, assembled in `src/app/page.tsx`. Feature visuals are SVG/CSS in `src/components/mockups/*` (not images).
+- **Navbar:** `src/components/layout/Navbar.tsx` is a thin wrapper that configures `src/components/layout/PillNav.tsx` (React Bits). Logo lockup = `public/brand/logo-mini.webp` (AS mark) + `logo-text.webp` (wordmark).
+- **Hero background:** React Bits Aurora inside `src/components/sections/Hero.tsx` (subtle, brand-tinted, reduced-motion aware).
+- **Favicon:** `src/app/icon.png` (the AS mark), generated by the asset script.
+- **Assets:** `scripts/convert-assets.mjs` **trims transparent padding** from the source logos, emits WebP into `public/brand/`, and builds the favicon. Source PNGs live in `Ambliq Solutions Assets/`. Regenerate with `npm run assets`.
+- ROI logic: pure, unit-tested fn in `src/lib/roi.ts`. SEO helpers in `src/lib/seo.ts`; `src/app/{sitemap,robots,opengraph-image}`.
+- Shared UI: `src/components/common/{Container,CtaButton,SectionHeading,Logo}`; motion: `src/components/motion/{LenisProvider,Reveal,CountUp}`.
 
 ## Env vars
 - `NEXT_PUBLIC_SITE_URL` — defaults to `https://ambliqsolutions.com`.
-- `NEXT_PUBLIC_CALENDLY_URL` — Umar's Calendly link (unset for now).
+- `NEXT_PUBLIC_CALENDLY_URL` — optional override for the booking calendar (a working default lives in `site.ts`).
 
-## Commands (once scaffolded)
-- `npm run dev` — local dev server
-- `npm run build` / `npm start` — production build
-- `node scripts/convert-assets.mjs` — regenerate WebP assets
+## Commands
+- `npm run dev` — local dev server (http://localhost:3000)
+- `npm run build` / `npm start` — production build / serve
+- `npm test` — Vitest (ROI + content tests)
+- `npm run assets` — regenerate brand logos + favicon
+- `npm run shoot -- <route> <label>` — Playwright screenshots → `docs/verify/` (**run from PowerShell on Windows, not Git Bash** — bash mangles the `/` route arg)
 
-## Pending from Umar
-- Calendly link + event details (see spec / project notes).
-- Real testimonials, results/numbers, client & integration logos.
+## Pending from Umar (all swap in via `site.ts`, no layout change)
+- Real **testimonial** + **result stats** (Results section currently uses clearly-marked placeholders)
+- Real **integration logos** (currently styled monogram tokens)
+- A **white/inverted logo** variant for the dark footer/sections (the navy logo is invisible on dark)
+
+## Notes for future sessions
+- `docs/verify/` (QA screenshots) and any `.superpowers/` (build-process scratch) are gitignored throwaways — safe to delete/regenerate.
+- React Bits components are MIT-licensed copies; reactbits.dev is a JS SPA, so source them from the `DavidHDev/react-bits` GitHub registry (`public/r/<Component>-TS-TW.json`) or its CLI.
