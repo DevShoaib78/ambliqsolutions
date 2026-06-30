@@ -257,7 +257,7 @@ export const site: Site = {
   // ── Results ─────────────────────────────────────────────────────────────────
   results: {
     stats: [
-      { value: 98,  suffix: '%', label: 'Call answer rate' },
+      { value: 98,  suffix: '%', label: 'Call answer rate (PLACEHOLDER)' },
       { value: 40,  suffix: '%', label: 'More leads qualified per month (PLACEHOLDER)' },
       { value: 24,  suffix: '/7', label: 'Hours available' },
       { value: 3,   suffix: 'x',  label: 'Faster first response vs. human team (PLACEHOLDER)' },

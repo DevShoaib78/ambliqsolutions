@@ -1,15 +1,27 @@
 import { chromium } from 'playwright'
 import { mkdirSync } from 'node:fs'
 
-const route = process.argv[2] || '/'
-const label = process.argv[3] || 'page'
+// Parse args: route, label, and optional --reduced flag
+const args = process.argv.slice(2)
+const reducedIdx = args.indexOf('--reduced')
+const reducedMotion = reducedIdx !== -1
+if (reducedMotion) args.splice(reducedIdx, 1)
+
+const route = args[0] || '/'
+const label = args[1] || 'page'
 const widths = [390, 768, 1024, 1440]
 
 mkdirSync('docs/verify', { recursive: true })
 
 const b = await chromium.launch()
 for (const w of widths) {
-  const ctx = await b.newContext({ viewport: { width: w, height: 900 }, deviceScaleFactor: 1 })
+  const ctxOptions = {
+    viewport: { width: w, height: 900 },
+    deviceScaleFactor: 1,
+  }
+  if (reducedMotion) ctxOptions.reducedMotion = 'reduce'
+
+  const ctx = await b.newContext(ctxOptions)
   const p = await ctx.newPage()
   // domcontentloaded rather than networkidle: Next.js HMR keeps a WebSocket
   // open so networkidle never resolves, which would yield blank screenshots.
@@ -23,8 +35,9 @@ for (const w of widths) {
   }
   await p.evaluate(() => scrollTo(0, 0))
   await p.waitForTimeout(400)
-  await p.screenshot({ path: `docs/verify/${label}-${w}.png`, fullPage: true })
+  const suffix = reducedMotion ? '-reduced' : ''
+  await p.screenshot({ path: `docs/verify/${label}-${w}${suffix}.png`, fullPage: true })
   await ctx.close()
 }
 await b.close()
-console.log('shot', label, widths.join(','))
+console.log('shot', label, widths.join(','), reducedMotion ? '(reduced-motion)' : '')
