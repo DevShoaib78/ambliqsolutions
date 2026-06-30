@@ -6,6 +6,7 @@ import Results       from '@/components/sections/Results'
 import Services      from '@/components/sections/Services'
 import Integrations  from '@/components/sections/Integrations'
 import Process       from '@/components/sections/Process'
+import FinalCta      from '@/components/sections/FinalCta'
 
 export default function Home() {
   return (
@@ -18,7 +19,8 @@ export default function Home() {
       <Services />
       <Integrations />
       <Process />
-      {/* CTA, FAQ sections go here */}
+      <FinalCta />
+      {/* FAQ section goes here */}
     </main>
   )
 }
