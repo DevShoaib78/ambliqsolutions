@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { site } from '@/content/site'
 import CtaButton from '@/components/common/CtaButton'
@@ -11,6 +11,8 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const firstLinkRef = useRef<HTMLAnchorElement>(null)
+
   // Lock background scroll while menu is open
   useEffect(() => {
     if (isOpen) {
@@ -23,6 +25,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     }
   }, [isOpen])
 
+  // Move focus to first menu link when opened
+  useEffect(() => {
+    if (isOpen && firstLinkRef.current) {
+      firstLinkRef.current.focus()
+    }
+  }, [isOpen])
+
   if (!isOpen) return null
 
   return (
@@ -31,6 +40,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         {site.nav.map((link, i) => (
           <Link
             key={link.href}
+            ref={i === 0 ? firstLinkRef : undefined}
             href={link.href}
             onClick={onClose}
             className={[

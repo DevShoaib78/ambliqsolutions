@@ -7,6 +7,7 @@ import Container from '@/components/common/Container'
 import SectionHeading from '@/components/common/SectionHeading'
 import CountUp from '@/components/motion/CountUp'
 import CtaButton from '@/components/common/CtaButton'
+import Reveal from '@/components/motion/Reveal'
 
 export default function RoiCalculator() {
   const [inputs, setInputs] = useState(site.roiDefaults)
@@ -20,18 +21,21 @@ export default function RoiCalculator() {
   return (
     <section id="roi" className="py-20 sm:py-28 bg-surface">
       <Container>
-        <SectionHeading
-          eyebrow="ROI Calculator"
-          heading="See What You're Losing to Missed Calls"
-          accent="What You're Losing"
-          sub="Adjust the sliders to estimate the revenue your business could recover by answering every call."
-          className="mb-12"
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="ROI Calculator"
+            heading="See What You're Losing to Missed Calls"
+            accent="What You're Losing"
+            sub="Adjust the sliders to estimate the revenue your business could recover by answering every call."
+            className="mb-12"
+          />
+        </Reveal>
 
         <div className="grid md:grid-cols-2 gap-8 items-stretch">
           {/* ── Input panel ─────────────────────────────────────────── */}
           <div className="space-y-7 rounded-2xl border border-bordersoft bg-white p-6 sm:p-8 shadow-sm">
             <SliderField
+              id="slider-monthly-calls"
               label={site.roi.inputs.monthlyCalls}
               value={inputs.monthlyCalls}
               min={50}
@@ -41,6 +45,7 @@ export default function RoiCalculator() {
               onChange={set('monthlyCalls')}
             />
             <SliderField
+              id="slider-missed-rate"
               label={site.roi.inputs.missedRate}
               value={inputs.missedRate}
               min={0}
@@ -50,6 +55,7 @@ export default function RoiCalculator() {
               onChange={set('missedRate')}
             />
             <SliderField
+              id="slider-conversion-rate"
               label={site.roi.inputs.conversionRate}
               value={inputs.conversionRate}
               min={0}
@@ -59,6 +65,7 @@ export default function RoiCalculator() {
               onChange={set('conversionRate')}
             />
             <SliderField
+              id="slider-avg-value"
               label={site.roi.inputs.avgValue}
               value={inputs.avgValue}
               min={100}
@@ -87,7 +94,7 @@ export default function RoiCalculator() {
               />
             </div>
 
-            <div className="mt-auto border-t border-white/20 pt-6 space-y-6">
+            <div className="mt-auto border-t border-white/20 pt-6 space-y-6" aria-live="polite">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-white/60 mb-2">
                   {site.roi.outputs.annualRevenue}
@@ -111,6 +118,7 @@ export default function RoiCalculator() {
 /* ── Sub-components ─────────────────────────────────────────────────── */
 
 function SliderField({
+  id,
   label,
   value,
   min,
@@ -119,6 +127,7 @@ function SliderField({
   display,
   onChange,
 }: {
+  id: string
   label: string
   value: number
   min: number
@@ -130,10 +139,11 @@ function SliderField({
   return (
     <div>
       <div className="mb-2 flex items-baseline justify-between">
-        <span className="text-sm font-semibold text-ink">{label}</span>
+        <label htmlFor={id} className="text-sm font-semibold text-ink">{label}</label>
         <span className="text-sm font-bold text-blue-500 tabular-nums">{display}</span>
       </div>
       <input
+        id={id}
         type="range"
         min={min}
         max={max}

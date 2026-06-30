@@ -94,12 +94,12 @@ export default function Navbar() {
             </button>
           </div>
         </Container>
-      </nav>
 
-      {/* Mobile dropdown (below the pill) */}
-      <div id="mobile-menu">
-        <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      </div>
+        {/* Mobile dropdown (below the pill) */}
+        <div id="mobile-menu">
+          <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        </div>
+      </nav>
     </header>
   )
 }

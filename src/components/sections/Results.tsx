@@ -41,20 +41,20 @@ export default function Results() {
         {/* ── Testimonial ──────────────────────────────────────────── */}
         <Reveal>
           <div className="mx-auto max-w-2xl rounded-2xl border border-bordersoft bg-surface p-8 sm:p-10">
-            <blockquote className="mb-6 text-base sm:text-lg text-ink-muted leading-relaxed italic">
-              {testimonial.quote}
+            <blockquote className="text-base sm:text-lg text-ink-muted leading-relaxed italic">
+              <p className="mb-4">{testimonial.quote}</p>
+              <footer className="flex items-center gap-3 not-italic">
+                <div className="h-10 w-10 rounded-full bg-brand-gradient flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                  {testimonial.name.charAt(0)}
+                </div>
+                <cite className="not-italic">
+                  <p className="font-semibold text-ink text-sm">{testimonial.name}</p>
+                  <p className="text-xs text-ink-muted">
+                    {testimonial.role} · {testimonial.company}
+                  </p>
+                </cite>
+              </footer>
             </blockquote>
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-brand-gradient flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                {testimonial.name.charAt(0)}
-              </div>
-              <div>
-                <p className="font-semibold text-ink text-sm">{testimonial.name}</p>
-                <p className="text-xs text-ink-muted">
-                  {testimonial.role} · {testimonial.company}
-                </p>
-              </div>
-            </div>
           </div>
         </Reveal>
       </Container>

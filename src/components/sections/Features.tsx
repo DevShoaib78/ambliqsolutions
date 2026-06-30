@@ -38,7 +38,7 @@ export default function Features() {
             return (
               <Reveal key={feature.id} delay={i * 0.08}>
                 <div className="flex flex-col rounded-2xl border border-bordersoft bg-white shadow-sm overflow-hidden">
-                  <div className="p-4 bg-navy-900">
+                  <div className="p-4 bg-navy-900" aria-hidden="true">
                     <Mockup />
                   </div>
                   <div className="p-6">
