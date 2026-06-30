@@ -15,12 +15,13 @@ export default function AuroraBackground() {
     <div
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden"
+      style={{ opacity: 0.14 }}
     >
       <Aurora
-        colorStops={['#00183C', '#0C60FC', '#00183C']}
-        amplitude={0.8}
-        blend={0.4}
-        speed={0.4}
+        colorStops={['#3B82F6', '#0C60FC', '#3B82F6']}
+        amplitude={1.0}
+        blend={0.35}
+        speed={0.5}
       />
     </div>
   )
