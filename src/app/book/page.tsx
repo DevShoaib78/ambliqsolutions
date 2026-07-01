@@ -30,7 +30,7 @@ export default function BookPage() {
               {site.bookPage.heading.replace(site.bookPage.accent, '')}
               <span className="text-gradient">{site.bookPage.accent}</span>
             </h1>
-            <p className="text-base sm:text-lg text-ink-muted">
+            <p className="text-base sm:text-lg text-ink">
               {site.bookPage.sub}
             </p>
           </div>
@@ -53,7 +53,7 @@ export default function BookPage() {
         <Container>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-ink-muted hover:text-blue-500 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-ink hover:text-blue-500 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to home

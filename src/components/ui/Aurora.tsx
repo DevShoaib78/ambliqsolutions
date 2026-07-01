@@ -149,6 +149,9 @@ export default function Aurora(props: AuroraProps) {
       alpha: true,
       premultipliedAlpha: true,
       antialias: true,
+      // Cap pixel ratio: on hi-DPI screens the full-screen shader would otherwise
+      // render 2x+ the fragments every frame for no perceptible quality gain.
+      dpr: Math.min(window.devicePixelRatio || 1, 1.5),
     })
     const gl = renderer.gl
     gl.clearColor(0, 0, 0, 0)
@@ -206,11 +209,32 @@ export default function Aurora(props: AuroraProps) {
         renderer.render({ scene: mesh })
       }
     }
-    animateId = requestAnimationFrame(update)
+
+    // Only animate while the canvas is on-screen AND the tab is visible — a
+    // full-screen WebGL shader is the main perf cost, and it's pointless to
+    // burn frames when the hero is scrolled away or the tab is backgrounded.
+    let inView = true
+    let pageVisible = !document.hidden
+    const start = () => { if (!animateId) animateId = requestAnimationFrame(update) }
+    const stop  = () => { if (animateId) { cancelAnimationFrame(animateId); animateId = 0 } }
+    const sync  = () => { (inView && pageVisible) ? start() : stop() }
+
+    const io = new IntersectionObserver(
+      entries => { inView = entries[0]?.isIntersecting ?? true; sync() },
+      { threshold: 0 },
+    )
+    io.observe(ctn)
+
+    const onVisibility = () => { pageVisible = !document.hidden; sync() }
+    document.addEventListener('visibilitychange', onVisibility)
+
     resize()
+    sync()
 
     return () => {
-      cancelAnimationFrame(animateId)
+      stop()
+      io.disconnect()
+      document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('resize', resize)
       if (ctn && gl.canvas.parentNode === ctn) ctn.removeChild(gl.canvas)
       gl.getExtension('WEBGL_lose_context')?.loseContext()

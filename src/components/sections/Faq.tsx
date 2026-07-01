@@ -38,7 +38,7 @@ export default function Faq() {
                   <AccordionTrigger className="py-5 text-sm sm:text-base font-semibold text-ink text-left">
                     {item.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-ink-muted pb-5 text-sm leading-relaxed">
+                  <AccordionContent className="text-ink pb-5 text-sm leading-relaxed">
                     {item.a}
                   </AccordionContent>
                 </AccordionItem>

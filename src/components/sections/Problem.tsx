@@ -1,7 +1,12 @@
 import Container from '@/components/common/Container'
 import SectionHeading from '@/components/common/SectionHeading'
 import Reveal from '@/components/motion/Reveal'
+import BorderGlow from '@/components/ui/BorderGlow'
 import { site } from '@/content/site'
+
+// Brand-blue palette + glow for the BorderGlow card hover effect
+const GLOW_COLORS = ['#0C60FC', '#3B82F6', '#60A5FA']
+const GLOW_HSL = '219 97 60'
 import {
   PhoneOff,
   Clock,
@@ -23,11 +28,11 @@ const PAIN_ICONS = [PhoneOff, Clock, Filter, TrendingDown, Users]
 
 // Rough layout for the scattered pain tiles: [top%, left%, rotate(deg)]
 const TILE_POSES: [number, number, number][] = [
-  [4,  2,  -6],
-  [10, 38,  4],
-  [42, 4,  -3],
-  [52, 38,  5],
-  [28, 20, -2],
+  [4,  14, -6],
+  [10, 42,  4],
+  [42, 14, -3],
+  [52, 40,  5],
+  [28, 28, -2],
 ]
 
 export default function Problem() {
@@ -43,11 +48,36 @@ export default function Problem() {
         <div className="mt-14 grid gap-8 md:grid-cols-2">
           {/* ── Left: Traditional ── */}
           <Reveal delay={0.1}>
-            <div className="flex h-full flex-col rounded-2xl border border-bordersoft bg-white p-8 shadow-sm">
-              <h3 className="mb-6 text-xl font-bold text-ink">Traditional</h3>
+            <BorderGlow
+              backgroundColor="#ffffff"
+              colors={GLOW_COLORS}
+              glowColor={GLOW_HSL}
+              borderRadius={16}
+              edgeSensitivity={22}
+              glowIntensity={1.1}
+              className="h-full"
+            >
+            <div className="flex h-full flex-col p-8">
+              <h3 className="mb-6 text-center text-xl font-bold text-ink">Traditional</h3>
 
-              {/* Scattered / tilted pain tiles */}
-              <div className="relative h-56 mb-6 select-none" aria-hidden="true">
+              {/* Mobile: simple wrapped chips (no overlap/clipping) */}
+              <div className="mb-6 flex flex-wrap gap-2 sm:hidden">
+                {traditionalTiles.map((tile, i) => {
+                  const Icon = PAIN_ICONS[i] ?? PhoneOff
+                  return (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 rounded-xl border border-red-100 bg-red-50 px-3.5 py-2 text-sm font-semibold text-ink shadow-sm"
+                    >
+                      <Icon className="h-4 w-4 text-red-400 shrink-0" />
+                      {tile}
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Desktop: scattered / tilted pain tiles */}
+              <div className="relative mb-6 hidden h-56 select-none sm:block" aria-hidden="true">
                 {traditionalTiles.map((tile, i) => {
                   const Icon = PAIN_ICONS[i] ?? PhoneOff
                   const [top, left, rot] = TILE_POSES[i]
@@ -67,19 +97,29 @@ export default function Problem() {
               {/* Pain list */}
               <ul className="mt-auto space-y-3">
                 {painList.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-ink-muted">
+                  <li key={i} className="flex items-start gap-3 text-sm text-ink">
                     <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
+            </BorderGlow>
           </Reveal>
 
           {/* ── Right: The Ambliq System ── */}
           <Reveal delay={0.2}>
-            <div className="flex h-full flex-col rounded-2xl p-8 shadow-lg bg-navy-gradient text-white">
-              <h3 className="mb-6 text-xl font-bold">The Ambliq System</h3>
+            <BorderGlow
+              backgroundColor="#00183C"
+              colors={GLOW_COLORS}
+              glowColor={GLOW_HSL}
+              borderRadius={16}
+              edgeSensitivity={26}
+              glowIntensity={1.2}
+              className="h-full text-white"
+            >
+            <div className="flex h-full flex-col p-8">
+              <h3 className="mb-6 text-center text-xl font-bold">The Ambliq System</h3>
 
               {/* 2×2 benefit grid */}
               <div className="mb-6 grid grid-cols-2 gap-3">
@@ -88,10 +128,18 @@ export default function Problem() {
                   return (
                     <div
                       key={i}
-                      className="flex flex-col items-center gap-2 rounded-xl bg-white/10 px-3 py-4 text-center"
+                      className="relative flex min-h-[92px] items-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-4"
                     >
-                      <Icon className="h-7 w-7 text-blue-400" />
-                      <span className="text-xs font-semibold leading-tight">{tile}</span>
+                      {/* Large watermark icon bleeding off the right edge */}
+                      <Icon
+                        className="pointer-events-none absolute -right-3 top-1/2 h-24 w-24 -translate-y-1/2 text-blue-400/20"
+                        strokeWidth={1.25}
+                        aria-hidden="true"
+                      />
+                      {/* Label on the left */}
+                      <span className="relative z-10 max-w-[68%] text-sm font-semibold leading-snug text-white">
+                        {tile}
+                      </span>
                     </div>
                   )
                 })}
@@ -107,6 +155,7 @@ export default function Problem() {
                 ))}
               </ul>
             </div>
+            </BorderGlow>
           </Reveal>
         </div>
       </Container>

@@ -64,16 +64,14 @@ export interface RoiLabels {
   resultItems: { missedCalls: string; lostConversions: string; monthlyRevenueLost: string }
 }
 
-export interface Testimonial {
-  quote: string
-  name: string
-  role: string
-  company: string
+export interface ResultsPromise {
+  heading: string
+  body: string
 }
 
 export interface Results {
   stats: Stat[]
-  testimonial: Testimonial
+  promise: ResultsPromise
 }
 
 export interface ProcessStep {
@@ -125,6 +123,7 @@ export interface IntegrationsHeader {
   heading: string
   body: string
   cta: string
+  ctaHref: string
 }
 
 export interface BookPageCopy {
@@ -274,6 +273,7 @@ export const site: Site = {
   featuresHeader: {
     eyebrow: 'What It Does',
     heading: 'What Your AI Receptionist Does',
+    accent: 'AI Receptionist',
     sub: 'Six core capabilities that work together to capture every lead and never let an enquiry fall through the cracks.',
   },
 
@@ -306,27 +306,24 @@ export const site: Site = {
 
   // ── Results ─────────────────────────────────────────────────────────────────
   results: {
+    // Capability benchmarks the system delivers by design (no client claims).
     stats: [
-      // NOTE: illustrative placeholder figures — replace with Umar's real metrics before launch
-      { value: 98,  suffix: '%',  label: 'Call answer rate' },
-      { value: 40,  suffix: '%',  label: 'More leads qualified per month' },
-      { value: 24,  suffix: '/7', label: 'Hours available' },
-      { value: 3,   suffix: 'x',  label: 'Faster first response vs. human team' },
+      { value: 24,  suffix: '/7', label: 'Always on, every hour of every day' },
+      { value: 100, suffix: '%',  label: 'Of calls answered, never sent to voicemail' },
+      { value: 3,   suffix: 's',  label: 'Typical time to answer, no hold music' },
+      { value: 100, suffix: '+',  label: 'Calls handled at once, no busy signal' },
     ],
-    testimonial: {
-      // NOTE: placeholder testimonial — replace with a real client quote before launch
-      quote:   '"Since adding the AI receptionist we haven\'t missed a single after-hours enquiry. Our booking rate improved noticeably within the first month."',
-      name:    'Client Name',
-      role:    'Owner',
-      company: 'Service Business',
+    promise: {
+      heading: 'Every missed call is a missed opportunity',
+      body:    'Your AI receptionist answers every call, qualifies every lead, and books appointments around the clock. No voicemail, no after-hours gaps, and no extra headcount. From the very first call, every opportunity gets captured.',
     },
   },
 
   resultsHeader: {
     eyebrow: 'Results',
-    heading: 'Numbers That Speak for Themselves',
-    accent:  'Speak for Themselves',
-    sub:     'Early client results and system benchmarks: real data from businesses using AI voice automation.',
+    heading: 'Built to Capture Every Opportunity',
+    accent:  'Every Opportunity',
+    sub:     'No missed calls, no voicemail, no after-hours gaps. Here is what your AI receptionist delivers from day one.',
   },
 
   // ── Services ─────────────────────────────────────────────────────────────────
@@ -386,7 +383,8 @@ export const site: Site = {
     eyebrow: 'Integrations',
     heading: 'Plugs into the tools you already use',
     body:    'Ambliq connects with the platforms your team relies on, including CRMs, calendars, scheduling tools, and automation workflows, without disrupting how you work.',
-    cta:     'See How It Works',
+    cta:     'Watch Demo',
+    ctaHref: 'https://www.loom.com/share/3d67aa86c4ed40568867205126cf4a38',
   },
 
   // ── Process ──────────────────────────────────────────────────────────────────

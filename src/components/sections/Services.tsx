@@ -3,6 +3,7 @@ import { site } from '@/content/site'
 import Container from '@/components/common/Container'
 import SectionHeading from '@/components/common/SectionHeading'
 import Reveal from '@/components/motion/Reveal'
+import SpotlightCard from '@/components/ui/SpotlightCard'
 
 const iconMap: Record<string, LucideIcon> = {
   Phone,
@@ -31,15 +32,21 @@ export default function Services() {
             const Icon = iconMap[service.icon] ?? Phone
             return (
               <Reveal key={service.id} delay={i * 0.07}>
-                <div className="group flex flex-col gap-4 rounded-xl border border-bordersoft bg-white p-6 transition hover:border-blue-500/30 hover:shadow-md">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500 transition group-hover:bg-blue-500/20">
-                    <Icon size={20} strokeWidth={1.75} />
+                <SpotlightCard
+                  spotlightColor="rgba(12, 96, 252, 0.12)"
+                  className="group h-full rounded-2xl border border-bordersoft bg-white p-7 transition-colors duration-300 hover:border-blue-500/40"
+                >
+                  {/* Oversized watermark icon bleeding off the top-right */}
+                  <Icon
+                    className="pointer-events-none absolute -right-5 -top-5 h-32 w-32 text-blue-500/[0.06] transition-all duration-500 group-hover:-rotate-6 group-hover:text-blue-500/[0.1]"
+                    strokeWidth={1}
+                    aria-hidden="true"
+                  />
+                  <div className="relative z-10">
+                    <h3 className="mb-2 text-lg font-bold text-ink">{service.title}</h3>
+                    <p className="text-sm leading-relaxed text-ink">{service.body}</p>
                   </div>
-                  <div>
-                    <h3 className="mb-1.5 font-bold text-ink">{service.title}</h3>
-                    <p className="text-sm text-ink-muted leading-relaxed">{service.body}</p>
-                  </div>
-                </div>
+                </SpotlightCard>
               </Reveal>
             )
           })}

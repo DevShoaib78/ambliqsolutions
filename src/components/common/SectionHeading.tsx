@@ -7,6 +7,8 @@ interface SectionHeadingProps {
   sub?: string
   align?: 'center' | 'left'
   className?: string
+  /** Override the default responsive heading size classes. */
+  headingClassName?: string
 }
 
 export default function SectionHeading({
@@ -16,6 +18,7 @@ export default function SectionHeading({
   sub,
   align = 'center',
   className,
+  headingClassName,
 }: SectionHeadingProps) {
   const alignClass = align === 'center' ? 'text-center' : 'text-left'
 
@@ -42,13 +45,13 @@ export default function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ink leading-tight">
+      <h2 className={cn(headingClassName ?? 'text-3xl sm:text-4xl lg:text-5xl', 'font-bold text-ink leading-tight')}>
         {renderHeading()}
       </h2>
       {sub && (
         <p
           className={cn(
-            'mt-4 text-base sm:text-lg text-ink-muted max-w-2xl',
+            'mt-4 text-base sm:text-lg text-ink max-w-2xl',
             align === 'center' && 'mx-auto'
           )}
         >

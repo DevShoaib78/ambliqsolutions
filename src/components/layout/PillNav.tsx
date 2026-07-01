@@ -37,6 +37,7 @@ const PillNav: React.FC<PillNavProps> = ({
   pillTextColor = '#ffffff',
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const circleRefs   = useRef<Array<HTMLSpanElement | null>>([])
   const tlRefs       = useRef<Array<gsap.core.Timeline | null>>([])
   const activeTweenRefs = useRef<Array<gsap.core.Tween | null>>([])
@@ -98,6 +99,14 @@ const PillNav: React.FC<PillNavProps> = ({
 
     return () => window.removeEventListener('resize', layout)
   }, [items, ease])
+
+  /* ── Shrink the bar a touch once the page is scrolled ── */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   /* ── Hover handlers ── */
   const handleEnter = (i: number) => {
@@ -165,11 +174,18 @@ const PillNav: React.FC<PillNavProps> = ({
     'relative overflow-hidden inline-flex items-center justify-center h-full no-underline rounded-full font-semibold text-[13px] leading-none uppercase tracking-[0.3px] whitespace-nowrap cursor-pointer px-[16px]'
 
   return (
-    <header className="fixed top-4 inset-x-4 z-50" role="banner">
-      <div className="relative">
+    <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4" role="banner">
+      <div
+        className={`relative w-full transition-[max-width] duration-300 ease-out ${
+          scrolled ? 'max-w-[58rem]' : 'max-w-5xl'
+        }`}
+        style={cssVars}
+      >
         {/* ── Main pill bar ── */}
         <nav
-          className="w-full flex items-center justify-between px-3 rounded-3xl shadow-md backdrop-blur-sm"
+          className={`w-full flex items-center justify-between px-3 rounded-3xl backdrop-blur-sm transition-[box-shadow] duration-300 ease-out ${
+            scrolled ? 'shadow-lg' : 'shadow-md'
+          }`}
           aria-label="Primary navigation"
           style={{ ...cssVars, background: 'var(--base)', height: '64px' }}
         >
@@ -183,13 +199,13 @@ const PillNav: React.FC<PillNavProps> = ({
               className="h-9 w-auto sm:h-10 shrink-0"
               priority
             />
-            {/* Wordmark: hidden on very small (< sm) to prevent overflow */}
+            {/* Wordmark: shown on all sizes (smaller on mobile to fit) */}
             <Image
               src="/brand/logo-text.webp"
               alt="Ambliq Solutions"
               width={1032}
               height={211}
-              className="h-[22px] w-auto sm:h-[26px] hidden sm:block"
+              className="block h-5 w-auto sm:h-[26px]"
               priority
             />
           </Link>
@@ -266,18 +282,16 @@ const PillNav: React.FC<PillNavProps> = ({
         <div
           id="pill-mobile-menu"
           ref={mobileMenuRef}
-          className="md:hidden absolute top-[calc(100%+8px)] left-0 right-0 rounded-3xl shadow-lg z-[998] origin-top overflow-hidden"
-          style={{ background: 'var(--base)' }}
+          className="md:hidden absolute top-[calc(100%+10px)] left-0 right-0 rounded-2xl bg-white border border-bordersoft shadow-xl z-[998] origin-top overflow-hidden"
           role="navigation"
           aria-label="Mobile navigation"
         >
-          <ul className="list-none m-0 p-[6px] flex flex-col gap-[4px]">
+          <ul className="list-none m-0 p-2 flex flex-col">
             {items.map(item => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="block py-3.5 px-5 text-[15px] font-semibold rounded-2xl transition-colors duration-150"
-                  style={{ background: 'var(--pill-bg)', color: 'var(--pill-text)' }}
+                  className="block rounded-xl px-4 py-3 text-[15px] font-semibold text-ink hover:bg-surface transition-colors duration-150"
                   onClick={closeMobileMenu}
                 >
                   {item.label}
@@ -285,7 +299,7 @@ const PillNav: React.FC<PillNavProps> = ({
               </li>
             ))}
           </ul>
-          <div className="p-[6px] pt-2 border-t border-bordersoft">
+          <div className="p-3 pt-2 border-t border-bordersoft">
             <CtaButton variant="gradient" className="w-full justify-center" />
           </div>
         </div>

@@ -20,7 +20,7 @@ export default function Process() {
         <div className="grid gap-10 sm:grid-cols-3 sm:gap-8 lg:gap-12">
           {site.process.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.1}>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col items-center gap-3 text-center">
                 {/* Giant gradient numeral */}
                 <span
                   className="text-gradient text-8xl lg:text-9xl font-bold leading-none select-none"
@@ -29,7 +29,7 @@ export default function Process() {
                   {i + 1}
                 </span>
                 <h3 className="text-xl font-bold text-ink mt-2">{step.title}</h3>
-                <p className="text-ink-muted text-sm leading-relaxed">{step.body}</p>
+                <p className="text-ink text-sm leading-relaxed max-w-xs">{step.body}</p>
               </div>
             </Reveal>
           ))}

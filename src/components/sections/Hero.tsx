@@ -13,20 +13,25 @@ export default function Hero() {
   const ctaRef     = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) {
-      // ensure visible
-      ;[headingRef, subRef, ctaRef].forEach(r => {
-        if (r.current) { r.current.style.opacity = '1'; r.current.style.transform = 'none' }
-      })
+    const targets = [headingRef.current, subRef.current, ctaRef.current]
+
+    // Reduced motion: just make sure everything is visible.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(targets, { clearProps: 'all' })
       return
     }
-    const tl = gsap.timeline()
-    tl.from(
-      [headingRef.current, subRef.current, ctaRef.current],
-      { y: 32, opacity: 0, duration: 0.75, stagger: 0.18, ease: 'power3.out' },
-    )
-    return () => { tl.kill() }
+
+    // fromTo (explicit opacity:1 end) so the text is ALWAYS animated back to
+    // visible — even on a client-side remount (e.g. navigating back from /book),
+    // where a plain .from() can otherwise animate 0 -> 0 and leave it hidden.
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        targets,
+        { y: 32, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.75, stagger: 0.18, ease: 'power3.out', clearProps: 'transform' },
+      )
+    })
+    return () => ctx.revert()
   }, [])
 
   const { headline, accent, subhead } = site.hero
@@ -37,7 +42,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-[92vh] items-center justify-center overflow-hidden pt-28 pb-24"
+      className="relative -mt-24 flex min-h-screen items-center justify-center overflow-hidden pt-40 pb-24"
       aria-labelledby="hero-heading"
     >
       {/* Soft Aurora background (WebGL, client-only, reduced-motion safe) */}
@@ -61,7 +66,7 @@ export default function Hero() {
 
         <p
           ref={subRef}
-          className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl"
+          className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-ink sm:text-xl"
         >
           {subhead}
         </p>
