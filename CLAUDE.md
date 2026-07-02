@@ -12,9 +12,14 @@ Core message: *Every missed call is a missed opportunity. Every fast response is
 - **Full design spec:** `docs/superpowers/specs/2026-06-30-ambliq-website-design.md`. Reference screenshots in `docs/references/futureflow/`.
 
 ## Repo & git
-- **GitHub:** https://github.com/DevShoaib78/ambliqsolutions (default branch `main`).
+- **GitHub (primary):** https://github.com/DevShoaib78/ambliqsolutions (default branch `main`). Remote: `origin`.
+- **GitHub (mirror):** https://github.com/umarshoaibdev-cloud/ambliq_solutions_website (branch `main`, note the underscores). Remote: `umar`.
 - **Active dev branch:** `feat/website-build`.
-- **COMMIT RULE (important):** commits must show **only `DevShoaib78` (Mohammed Shoaib Choudry)** as author. **Never add a `Co-Authored-By:` trailer or any AI/Claude attribution** to commit messages in this repo. Plain commit messages only.
+- **COMMIT RULE (important):** every commit must show **only `DevShoaib78` — Mohammed Shoaib Choudry `<mohammedshoaibchy78@gmail.com>`** as **both author and committer**. **NEVER add a `Co-Authored-By:` trailer or any Claude/AI/other-person attribution.** Just his name, always. Plain commit messages only.
+- **PUSH RULE (important):** when asked to "push the codebase" (as DevShoaib78), push to **BOTH** repos' `main`:
+  - `git push origin HEAD:main` → `DevShoaib78/ambliqsolutions.git`
+  - `git push umar HEAD:main` → `umarshoaibdev-cloud/ambliq_solutions_website.git`
+  Both authored solely by DevShoaib78, no co-author. If the `umar` remote is missing: `git remote add umar https://github.com/umarshoaibdev-cloud/ambliq_solutions_website.git`.
 
 ## Status (current)
 Built, functional, and mobile-polished. Landing page (10 sections: Hero, Problem, Features, ROI calculator, Results, Services, Integrations, Process, Final CTA, FAQ) + `/book` (with the **live Calendly calendar**) + SEO. Fully responsive (mobile verified at 360/390/414 plus 768/1024/1440), reduced-motion aware, production build green, pages static (SSG). Em dashes stay out of all user-facing copy.
