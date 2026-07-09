@@ -29,7 +29,7 @@ function FeatureCard({ feature, widthClass = '' }: { feature: Feature; widthClas
   const Mockup = MOCKUP_MAP[feature.mockup]
   return (
     <div className={`flex flex-col rounded-2xl border border-bordersoft bg-white shadow-sm overflow-hidden ${widthClass}`}>
-      <div className="p-4 bg-navy-900" aria-hidden="true">
+      <div className="p-4" aria-hidden="true">
         <Mockup />
       </div>
       <div className="p-6">

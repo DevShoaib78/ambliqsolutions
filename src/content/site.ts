@@ -28,7 +28,8 @@ export interface Faq {
 
 export interface Integration {
   name: string
-  abbr: string
+  /** simple-icons slug for a real brand logo; omit to render a name tile. */
+  slug?: string
 }
 
 export interface RoiDefaults {
@@ -282,7 +283,7 @@ export const site: Site = {
     monthlyCalls:    500,
     missedRate:      30,   // % of calls currently missed
     conversionRate:  20,   // % of qualified leads that convert
-    avgValue:        2500, // average client value in $
+    avgValue:        500,  // average client value in $ (default matches ambotix)
   },
 
   roi: {
@@ -369,22 +370,23 @@ export const site: Site = {
 
   // ── Integrations ─────────────────────────────────────────────────────────────
   integrations: [
-    { name: 'HubSpot',       abbr: 'HS'  },
-    { name: 'GoHighLevel',   abbr: 'GHL' },
-    { name: 'Salesforce',    abbr: 'SF'  },
-    { name: 'Calendly',      abbr: 'CAL' },
-    { name: 'Twilio',        abbr: 'TW'  },
-    { name: 'Make',          abbr: 'MK'  },
-    { name: 'Zapier',        abbr: 'ZAP' },
-    { name: 'Notion',        abbr: 'NO'  },
+    { name: 'HubSpot',     slug: 'hubspot'  },
+    { name: 'GoHighLevel'                   },
+    { name: 'Salesforce'                    },
+    { name: 'Calendly',    slug: 'calendly' },
+    { name: 'Twilio'                        },
+    { name: 'Make',        slug: 'make'     },
+    { name: 'Zapier',      slug: 'zapier'   },
+    { name: 'Notion',      slug: 'notion'   },
+    { name: 'n8n',         slug: 'n8n'      },
   ],
 
   integrationsHeader: {
     eyebrow: 'Integrations',
     heading: 'Plugs into the tools you already use',
     body:    'Ambliq connects with the platforms your team relies on, including CRMs, calendars, scheduling tools, and automation workflows, without disrupting how you work.',
-    cta:     'Watch Demo',
-    ctaHref: 'https://www.loom.com/share/3d67aa86c4ed40568867205126cf4a38',
+    cta:     'Book a Call',
+    ctaHref: '/book',
   },
 
   // ── Process ──────────────────────────────────────────────────────────────────

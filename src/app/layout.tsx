@@ -3,7 +3,8 @@ import "./globals.css";
 import LenisProvider from "@/components/motion/LenisProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { defaultMetadata, organizationJsonLd, serviceJsonLd } from "@/lib/seo";
+import ScrollToTop from "@/components/common/ScrollToTop";
+import { defaultMetadata, organizationJsonLd, websiteJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -25,16 +26,23 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([organizationJsonLd(), serviceJsonLd()]),
+            __html: JSON.stringify([
+              organizationJsonLd(),
+              websiteJsonLd(),
+              serviceJsonLd(),
+              faqJsonLd(),
+            ]),
           }}
         />
         <LenisProvider>
           <Navbar />
-          {/* pt-24 clears the fixed navbar (pill is ~68px at top-4 = 16px from top) */}
-          <div className="flex-1 flex flex-col pt-24">
+          {/* pt-24 clears the fixed navbar; overflow-x-clip stops decorative
+              blurs/glows from ever creating a horizontal scrollbar on mobile */}
+          <div className="flex-1 flex flex-col pt-24 overflow-x-clip">
             {children}
           </div>
           <Footer />
+          <ScrollToTop />
         </LenisProvider>
       </body>
     </html>

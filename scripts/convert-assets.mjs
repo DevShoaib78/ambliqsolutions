@@ -22,8 +22,9 @@ for (const [src, base] of jobs) {
   console.log(`webp: ${OUT}/${base}.webp -> ${info.width}x${info.height}`)
 }
 
-// PNG fallback for the mini logo (trimmed to match the webp)
-await sharp(`${SRC}/Without BGs/Mini Logo-Photoroom.png`).trim().png().toFile(`${OUT}/logo-mini.png`)
+// NOTE: every served brand logo is WebP. The only PNGs we keep are the favicon
+// (below) and public/og-image.png (social previews) — neither renders reliably
+// as WebP across browsers / link-preview crawlers.
 
 // Favicon: trim first so the AS mark fills the icon, then 512x512 with ~8% padding.
 const PAD = Math.round(512 * 0.08)

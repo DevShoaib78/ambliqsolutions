@@ -45,7 +45,7 @@ export default function Hero() {
       className="relative -mt-24 flex min-h-screen items-center justify-center overflow-hidden pt-40 pb-24"
       aria-labelledby="hero-heading"
     >
-      {/* Soft Aurora background (WebGL, client-only, reduced-motion safe) */}
+      {/* Sky-blue radial background (clean, subtly living) */}
       <AuroraBackground />
 
       <Container className="relative z-10 text-center">

@@ -13,6 +13,7 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     }
     gsap.registerPlugin(ScrollTrigger)
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
+    ;(window as unknown as { lenis?: Lenis }).lenis = lenis
     lenis.on('scroll', ScrollTrigger.update)
     let id: number
     const raf = (t: number) => {

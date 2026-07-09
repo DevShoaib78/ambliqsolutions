@@ -1,21 +1,12 @@
-import { type LucideIcon, Phone, Workflow, Filter, CalendarCheck, DatabaseZap } from 'lucide-react'
 import { site } from '@/content/site'
 import Container from '@/components/common/Container'
 import SectionHeading from '@/components/common/SectionHeading'
 import Reveal from '@/components/motion/Reveal'
-import SpotlightCard from '@/components/ui/SpotlightCard'
-
-const iconMap: Record<string, LucideIcon> = {
-  Phone,
-  Workflow,
-  Filter,
-  CalendarCheck,
-  DatabaseZap,
-}
+import { SERVICE_ART } from '@/components/services/ServiceArt'
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 sm:py-28 bg-surface">
+    <section id="services" className="overflow-hidden bg-surface py-20 sm:py-28">
       <Container>
         <Reveal>
           <SectionHeading
@@ -27,26 +18,22 @@ export default function Services() {
           />
         </Reveal>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {site.services.map((service, i) => {
-            const Icon = iconMap[service.icon] ?? Phone
+            const Art = SERVICE_ART[i] ?? SERVICE_ART[0]
             return (
               <Reveal key={service.id} delay={i * 0.07}>
-                <SpotlightCard
-                  spotlightColor="rgba(12, 96, 252, 0.12)"
-                  className="group h-full rounded-2xl border border-bordersoft bg-white p-7 transition-colors duration-300 hover:border-blue-500/40"
-                >
-                  {/* Oversized watermark icon bleeding off the top-right */}
-                  <Icon
-                    className="pointer-events-none absolute -right-5 -top-5 h-32 w-32 text-blue-500/[0.06] transition-all duration-500 group-hover:-rotate-6 group-hover:text-blue-500/[0.1]"
-                    strokeWidth={1}
-                    aria-hidden="true"
-                  />
-                  <div className="relative z-10">
+                <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-bordersoft bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                  {/* Illustrated top */}
+                  <div className="transition-transform duration-300 group-hover:scale-[1.02]" aria-hidden="true">
+                    <Art />
+                  </div>
+                  {/* Text */}
+                  <div className="flex flex-1 flex-col p-6 text-center">
                     <h3 className="mb-2 text-lg font-bold text-ink">{service.title}</h3>
                     <p className="text-sm leading-relaxed text-ink">{service.body}</p>
                   </div>
-                </SpotlightCard>
+                </div>
               </Reveal>
             )
           })}

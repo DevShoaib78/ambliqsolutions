@@ -166,6 +166,33 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   50%       { transform: translateY(-10px); }
 }
 
+/* ── Hero radial background (Ambliq electric-blue, reaches down the sides) ── */
+.hero-radial {
+  position: absolute;
+  inset: -8%;
+  background: radial-gradient(120% 120% at 50% 100%, #ffffff 34%, #0c60fc 100%);
+  will-change: transform;
+}
+
+/* Moving light layer — lighter-blue / white glows that visibly drift across the
+   top (they only ever brighten, so never any dark/black), giving a lively,
+   ongoing aurora over the electric-blue base. */
+.hero-shimmer {
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(34% 38% at 24% 18%, rgba(147, 197, 253, 0.75) 0%, transparent 60%),
+    radial-gradient(30% 34% at 74% 14%, rgba(255, 255, 255, 0.60) 0%, transparent 62%),
+    radial-gradient(38% 30% at 52% 4%,  rgba(96, 165, 250, 0.60) 0%, transparent 58%);
+  filter: blur(58px);
+  animation: heroShimmer 11s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+@keyframes heroShimmer {
+  0%   { transform: translate3d(-11%, -3%, 0) scale(1);   opacity: 0.7; }
+  100% { transform: translate3d(11%, 5%, 0)  scale(1.14); opacity: 1; }
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }

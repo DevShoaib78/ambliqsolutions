@@ -5,14 +5,14 @@ export default function Natural() {
     { from: 'user', text: 'Thursday morning please' },
   ]
   return (
-    <div className="flex flex-col gap-2 w-full h-40 bg-navy-900 rounded-xl px-4 py-3 justify-center overflow-hidden">
+    <div className="flex flex-col gap-2 w-full h-40 bg-gradient-to-br from-white to-[#dbeafe] rounded-xl px-4 py-3 justify-center overflow-hidden">
       {bubbles.map((b, i) => (
         <div key={i} className={`flex ${b.from === 'ai' ? 'justify-start' : 'justify-end'}`}>
           <div
             className={`max-w-[80%] rounded-2xl px-3 py-1.5 text-[10px] leading-relaxed ${
               b.from === 'ai'
-                ? 'bg-blue-500/20 border border-blue-500/30 text-white/90 rounded-tl-sm'
-                : 'bg-white/10 text-white/70 rounded-tr-sm'
+                ? 'bg-blue-500 text-white rounded-tl-sm'
+                : 'bg-white text-ink ring-1 ring-slate-200 rounded-tr-sm'
             }`}
           >
             {b.text}
@@ -24,7 +24,7 @@ export default function Natural() {
         {[3,5,8,6,10,7,4,9,5,3,7,10,6,4,8].map((h, i) => (
           <div
             key={i}
-            className="w-0.5 rounded-full bg-blue-500 opacity-70"
+            className="w-0.5 rounded-full bg-blue-500 opacity-80"
             style={{ height: `${h}px` }}
           />
         ))}
