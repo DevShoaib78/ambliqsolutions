@@ -96,14 +96,21 @@ export default function RoiCalculator() {
 
             <div className="mt-auto border-t border-white/20 pt-6 space-y-6" aria-live="polite">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-white/60 mb-2">
-                  {site.roi.outputs.annualRevenue}
+                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-blue-300">
+                  {site.roi.outputs.monthlyRevenueRecovered}
                 </p>
                 <CountUp
                   prefix="$"
-                  end={result.recoveredAnnual}
-                  className="text-5xl sm:text-6xl font-extrabold leading-none"
+                  end={result.monthlyRevenueRecovered}
+                  className="text-5xl font-extrabold leading-none sm:text-6xl"
                 />
+                <p className="mt-3 text-sm font-semibold text-white/70 tabular-nums">
+                  {site.roi.outputs.annualRevenue}:{' '}
+                  <span className="text-white">${result.recoveredAnnual.toLocaleString()}</span>
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-white/50">
+                  {site.roi.outputs.recoveryNote}
+                </p>
               </div>
 
               <CtaButton className="w-full">{site.cta.label}</CtaButton>

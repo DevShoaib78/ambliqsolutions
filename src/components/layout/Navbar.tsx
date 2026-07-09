@@ -1,18 +1,30 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { site } from '@/content/site'
 import CtaButton from '@/components/common/CtaButton'
+
+type LenisLike = {
+  scrollTo: (t: Element | number, o?: object) => void
+  resize: () => void
+}
 
 /**
  * Navbar — a floating white "pill" bar: logo left, plain-text links centered,
  * gradient CTA right; subtly settles on scroll. Clean white dropdown on mobile.
+ *
+ * Nav items in `site.nav` are bare hashes ("#roi"). On a non-home route those
+ * would resolve to "/book#roi", which matches nothing and silently does nothing,
+ * so away from "/" we rewrite them to "/#roi" and let the router go home first.
  */
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+  const onHome = pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -27,6 +39,35 @@ export default function Navbar() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
+
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => { setOpen(false) }, [pathname])
+
+  const hrefFor = (hash: string) => (onHome ? hash : `/${hash}`)
+
+  const onNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+      setOpen(false)
+      if (!onHome) return // let the router navigate to "/#hash"
+      const el = document.querySelector(hash)
+      if (!el) return
+      e.preventDefault()
+      const lenis = (window as unknown as { lenis?: LenisLike }).lenis
+      if (!lenis) {
+        el.scrollIntoView({ behavior: 'smooth' })
+        return
+      }
+      // Lenis caches page dimensions and clamps scroll targets to them. After a
+      // trip to /book (a short page) that cached limit is far too small, so nav
+      // links would barely move the page until something else triggered a resize.
+      lenis.resize()
+      // No manual offset: both Lenis and native scrollIntoView already subtract
+      // the section's `scroll-margin-top` (globals.css), which is what keeps the
+      // heading clear of the fixed pill. Passing an offset too would double it.
+      lenis.scrollTo(el)
+    },
+    [onHome],
+  )
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4" role="banner">
@@ -49,7 +90,8 @@ export default function Navbar() {
             {site.nav.map(item => (
               <li key={item.href}>
                 <Link
-                  href={item.href}
+                  href={hrefFor(item.href)}
+                  onClick={e => onNavClick(e, item.href)}
                   className="text-sm font-semibold text-ink/75 transition-colors hover:text-blue-500"
                 >
                   {item.label}
@@ -92,9 +134,9 @@ export default function Navbar() {
             {site.nav.map(item => (
               <li key={item.href}>
                 <Link
-                  href={item.href}
+                  href={hrefFor(item.href)}
                   className="block rounded-xl px-4 py-3 text-[15px] font-semibold text-ink transition-colors duration-150 hover:bg-surface"
-                  onClick={() => setOpen(false)}
+                  onClick={e => onNavClick(e, item.href)}
                 >
                   {item.label}
                 </Link>

@@ -4,6 +4,7 @@ import LenisProvider from "@/components/motion/LenisProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/common/ScrollToTop";
+import RouteScroll from "@/components/motion/RouteScroll";
 import { defaultMetadata, organizationJsonLd, websiteJsonLd, serviceJsonLd, faqJsonLd } from "@/lib/seo";
 
 const manrope = Manrope({
@@ -23,6 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        {/* Warm up the Calendly connection before the user reaches /book, so the
+            booking calendar starts fetching without a DNS + TLS round trip. */}
+        <link rel="preconnect" href="https://calendly.com" />
+        <link rel="dns-prefetch" href="https://calendly.com" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -43,6 +49,7 @@ export default function RootLayout({
           </div>
           <Footer />
           <ScrollToTop />
+          <RouteScroll />
         </LenisProvider>
       </body>
     </html>

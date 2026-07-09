@@ -5,7 +5,12 @@ import { ArrowUp } from 'lucide-react'
 
 /**
  * Floating "back to top" button (lower-right). Appears once the user has
- * scrolled past the hero; smoothly returns to the top (via Lenis when present).
+ * scrolled past the hero and jumps straight to the hero.
+ *
+ * The jump is deliberately INSTANT, not smooth: animating back up from the FAQ
+ * flies the viewport through every section in between, which reads as a long
+ * jittery blur on a phone. `immediate` also tells Lenis to snap its internal
+ * animated position, otherwise it keeps easing toward the target afterwards.
  */
 export default function ScrollToTop() {
   const [show, setShow] = useState(false)
@@ -19,8 +24,8 @@ export default function ScrollToTop() {
 
   const toTop = () => {
     const lenis = (window as unknown as { lenis?: { scrollTo: (t: number, o?: object) => void } }).lenis
-    if (lenis) lenis.scrollTo(0, { duration: 1.1 })
-    else window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (lenis) lenis.scrollTo(0, { immediate: true, force: true })
+    else window.scrollTo({ top: 0, behavior: 'auto' })
   }
 
   return (

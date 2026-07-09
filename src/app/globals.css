@@ -193,6 +193,13 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   100% { transform: translate3d(11%, 5%, 0)  scale(1.14); opacity: 1; }
 }
 
+/* Anchor targets clear the fixed navbar pill. Covers the native jump that the
+   router performs when landing on "/#roi" from another route, where Lenis is
+   not driving the scroll. */
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }

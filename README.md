@@ -34,7 +34,7 @@ src/
     sections/          Landing-page sections
     layout/            Navbar + footer
     common/            Shared UI (container, CTA, headings, scroll-to-top)
-    motion/            Smooth scroll + scroll animations
+    motion/            Smooth scroll, route/hash scroll handling, scroll animations
     mockups/           SVG/CSS feature illustrations ("What It Does")
     services/          Bespoke illustrations for the Services cards
   content/site.ts      All site copy and content (single source of truth)

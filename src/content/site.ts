@@ -61,7 +61,13 @@ export interface Problem {
 
 export interface RoiLabels {
   inputs: { monthlyCalls: string; missedRate: string; conversionRate: string; avgValue: string }
-  outputs: { recoveredLeads: string; newRevenue: string; annualRevenue: string }
+  outputs: {
+    recoveredLeads: string
+    newRevenue: string
+    monthlyRevenueRecovered: string
+    annualRevenue: string
+    recoveryNote: string
+  }
   resultItems: { missedCalls: string; lostConversions: string; monthlyRevenueLost: string }
 }
 
@@ -296,7 +302,10 @@ export const site: Site = {
     outputs: {
       recoveredLeads:  'Leads recovered per month',
       newRevenue:      'Estimated new monthly revenue',
+      monthlyRevenueRecovered: 'Monthly revenue recovered',
       annualRevenue:   'Estimated annual revenue recovered',
+      recoveryNote:
+        'Assumes a conservative 80% of missed-call revenue is won back once every call is answered.',
     },
     resultItems: {
       missedCalls:        'Calls missed / mo',
