@@ -20,6 +20,9 @@ Core message: *Every missed call is a missed opportunity. Every fast response is
   - `git push origin HEAD:main` → `DevShoaib78/ambliqsolutions.git`
   - `git push umar HEAD:main` → `umarshoaibdev-cloud/ambliq_solutions_website.git`
   Both authored solely by DevShoaib78, no co-author. If the `umar` remote is missing: `git remote add umar https://github.com/umarshoaibdev-cloud/ambliq_solutions_website.git`.
+- **UMAR-REPO RULE (important):** the `umar` repo is the one wired to Vercel, and Vercel only deploys pushes from the repo **owner** (DevShoaib78 is a collaborator, so his commits do not trigger a deploy). So commits that must reach the live domain have to be authored **and** committed as `umarshoaibdev-cloud <umarshoaibdev@gmail.com>`:
+  `git -c user.name="umarshoaibdev-cloud" -c user.email="umarshoaibdev@gmail.com" commit -m "<plain message>"` — still **no `Co-Authored-By:` trailer, no AI attribution**.
+- **NEVER ship these to the `umar` repo:** `CLAUDE.md`, `AGENTS.md`, `.mcp.json`, `docs/superpowers/`. They were deleted from `umar/main` in `aeccdff`. A plain `git push umar HEAD:main` from `feat/website-build` would re-add them, so build the commit from a tree with those paths removed (e.g. a temp `GIT_INDEX_FILE` + `git rm --cached` + `git commit-tree`).
 
 ## Status (current)
 Built, functional, and mobile-polished. Landing page (10 sections: Hero, Problem, Features, ROI calculator, Results, Services, Integrations, Process, Final CTA, FAQ) + `/book` (with the **live Calendly calendar**) + SEO. Fully responsive (mobile verified at 360/390/414 plus 768/1024/1440), reduced-motion aware, production build green, pages static (SSG). Em dashes stay out of all user-facing copy.
